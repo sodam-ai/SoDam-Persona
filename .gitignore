@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+*.swp
+*~
+
+# Backups / temp
+*.bak
+*.backup
+*.persona-backup-*
+_*.js
