@@ -1,11 +1,11 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "claude-code-persona",
+  "name": "claude-code-persona-setting",
   "owner": {
     "name": "sodam-ai"
   },
   "metadata": {
-    "description": "sodam-ai 개인 Claude Code 페르소나·세팅 마켓플레이스. 플러그인을 하나씩 추가한다."
+    "description": "sodam-ai claude-code_persona-setting 페르소나 플러그인 전용 마켓플레이스."
   },
   "plugins": [
     {

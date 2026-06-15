@@ -1,12 +1,15 @@
-# claude-code_persona
+# claude-code_persona-setting
 
 > **한 줄 소개**
 > Claude Code(AI 코딩 도구)에 **"나만의 AI 개발 파트너 성격(페르소나)"**을 입히는 플러그인입니다.
 > 한 번 설치하면 **매번 자동으로 켜지고**, 새 컴퓨터로 옮길 때도 **명령 몇 줄**이면 그대로 복원됩니다.
 
+> **이 저장소의 범위**
+> 이 저장소는 **오직 페르소나 플러그인(persona-plugin) 하나만**을 위한 곳입니다. (다른 종류의 설정을 섞지 않습니다.)
+
 > **이 글은 누구를 위한 것?**
 > 컴퓨터·AI·깃허브를 **처음 다루는 분**도 따라 할 수 있게, 용어 하나하나 풀어서 설명합니다.
-> 어려운 부분은 [GUIDE.md](./GUIDE.md)에 더 자세히 적어 두었습니다.
+> 더 자세한 내용·문제 해결은 [GUIDE.md](./GUIDE.md)에 있습니다.
 
 ---
 
@@ -23,7 +26,7 @@
 10. [파일 · 문서 위치](#10-파일--문서-위치)
 11. [문제 · 오류 대처](#11-문제--오류-대처)
 12. [안전 · 백업 · 제거(롤백)](#12-안전--백업--제거롤백)
-13. [세팅 더 추가하기 (저장소 확장)](#13-세팅-더-추가하기-저장소-확장)
+13. [이 저장소의 범위 (페르소나 전용)](#13-이-저장소의-범위-페르소나-전용)
 
 ---
 
@@ -45,10 +48,10 @@
 | **터미널 / CLI** | 글자로 명령을 입력하는 창 (Claude Code가 실행되는 곳) |
 | **Claude Code** | 자연어로 시키는 AI 코딩 도구 (이 플러그인이 설치되는 본체) |
 | **플러그인(plugin)** | 기능을 묶어 끼웠다 뺐다 하는 "부품 묶음" |
-| **마켓플레이스(marketplace)** | 플러그인들의 "목록/창고" |
+| **마켓플레이스(marketplace)** | 플러그인이 담긴 "목록/창고" |
 | **hook(훅)** | 특정 순간(세션 시작 등)에 **자동으로 실행**되는 장치 → "항상 켜짐"을 담당 |
 | **skill(스킬)** | 필요할 때만 **불러오는 지식 묶음** → "상황별 깊이"를 담당 |
-| **저장소(repository, repo)** | 코드·파일을 보관하는 인터넷 보관소 (여기선 GitHub의 `claude-code_persona`) |
+| **저장소(repository, repo)** | 코드·파일을 보관하는 인터넷 보관소 (여기선 GitHub의 `claude-code_persona-setting`) |
 | **clone(클론)** | 그 저장소를 **내 컴퓨터로 복제(다운로드)**하는 것 |
 | **commit / push** | 변경 내용을 기록하고(commit), 인터넷 저장소로 올리는 것(push) |
 
@@ -75,18 +78,18 @@
 
 **① 터미널에서** (저장소 다운로드):
 ```bash
-git clone https://github.com/sodam-ai/claude-code_persona.git
+git clone https://github.com/sodam-ai/claude-code_persona-setting.git
 ```
 
 **② Claude Code 안에서** (위에서 clone한 폴더 경로를 넣으세요):
 ```
-/plugin marketplace add ./claude-code_persona
-/plugin install persona-plugin@claude-code-persona
+/plugin marketplace add ./claude-code_persona-setting
+/plugin install persona-plugin@claude-code-persona-setting
 ```
 
 **③ Claude Code를 껐다 켜기** (재시작) → 끝. 페르소나가 항상 켜집니다.
 
-> 📌 설치 명령 끝의 `@claude-code-persona`는 **마켓플레이스 이름**입니다(저장소 이름과 같게 맞춰 뒀습니다). 그대로 입력하세요.
+> 📌 설치 명령 끝의 `@claude-code-persona-setting`은 **마켓플레이스 이름**입니다(저장소 이름과 같게 맞춰 뒀습니다). 그대로 입력하세요.
 
 ---
 
@@ -102,21 +105,21 @@ claude --version
 **2단계 — 저장소 다운로드(clone)**
 원하는 폴더로 이동한 뒤:
 ```bash
-git clone https://github.com/sodam-ai/claude-code_persona.git
+git clone https://github.com/sodam-ai/claude-code_persona-setting.git
 ```
 - 비공개 저장소라 로그인 창이 뜰 수 있습니다. `gh auth login`을 미리 해두면 매끄럽습니다.
-- 완료되면 `claude-code_persona` 라는 폴더가 생깁니다. **그 폴더의 전체 경로**를 기억하세요 (예: `C:\Users\내이름\claude-code_persona`).
+- 완료되면 `claude-code_persona-setting` 라는 폴더가 생깁니다. **그 폴더의 전체 경로**를 기억하세요 (예: `C:\Users\내이름\claude-code_persona-setting`).
 
 **3단계 — 마켓플레이스로 등록**
 Claude Code를 실행한 뒤, 입력창에:
 ```
 /plugin marketplace add (2단계에서 생긴 폴더 경로)
 ```
-→ "Successfully added marketplace: claude-code-persona" 가 나오면 성공.
+→ "Successfully added marketplace: claude-code-persona-setting" 가 나오면 성공.
 
 **4단계 — 플러그인 설치**
 ```
-/plugin install persona-plugin@claude-code-persona
+/plugin install persona-plugin@claude-code-persona-setting
 ```
 → "Successfully installed" 이 나오면 성공.
 
@@ -165,13 +168,9 @@ claude plugin list
 ```
 [새 PC] 설치(4·5번) → 재시작 → 평소처럼 사용
                                    │
-                  내용을 고치고 싶다 ─┤
+                  내용을 고치고 싶다 ─┘
                                    ▼
-        플러그인 파일 수정 → marketplace update → 재설치 → 재시작
-                                   │
-                   설정을 더 늘리고 싶다 ─┤
-                                   ▼
-            새 플러그인 폴더 추가 → marketplace.json 1줄 추가 → commit/push (13번)
+        플러그인 파일 수정 → marketplace update → 재설치 → 재시작 → (필요 시) git push
 ```
 
 > ⚠️ **가장 흔한 함정**: 플러그인 파일을 고친 뒤 **재설치(또는 marketplace update)를 안 하면** 예전 버전이 계속 켜집니다. 자세히는 [11번](#11-문제--오류-대처).
@@ -186,7 +185,7 @@ Claude Code **입력창**에서 쓰는 명령 (슬래시 `/`로 시작):
 |---|---|
 | `/plugin` | 플러그인 관리 메뉴 (마우스로 클릭하며 설치·삭제) |
 | `/plugin marketplace add (경로)` | 폴더를 마켓플레이스로 등록 |
-| `/plugin install persona-plugin@claude-code-persona` | 플러그인 설치 |
+| `/plugin install persona-plugin@claude-code-persona-setting` | 플러그인 설치 |
 
 **터미널**에서 쓰는 명령 (`claude plugin ...`):
 
@@ -194,12 +193,12 @@ Claude Code **입력창**에서 쓰는 명령 (슬래시 `/`로 시작):
 |---|---|
 | `claude plugin list` | 설치된 플러그인 목록·활성 상태 |
 | `claude plugin details persona-plugin` | 구성요소(스킬·훅) + 예상 토큰 비용 |
-| `claude plugin enable persona-plugin@claude-code-persona` | 켜기 |
-| `claude plugin disable persona-plugin@claude-code-persona` | 끄기 |
-| `claude plugin uninstall persona-plugin@claude-code-persona` | 삭제 |
+| `claude plugin enable persona-plugin@claude-code-persona-setting` | 켜기 |
+| `claude plugin disable persona-plugin@claude-code-persona-setting` | 끄기 |
+| `claude plugin uninstall persona-plugin@claude-code-persona-setting` | 삭제 |
 | `claude plugin marketplace list` | 등록된 마켓플레이스 목록 |
-| `claude plugin marketplace update claude-code-persona` | 소스에서 최신으로 갱신(수정 후 필수) |
-| `claude plugin marketplace remove claude-code-persona` | 마켓플레이스 등록 해제 |
+| `claude plugin marketplace update claude-code-persona-setting` | 소스에서 최신으로 갱신(수정 후 필수) |
+| `claude plugin marketplace remove claude-code-persona-setting` | 마켓플레이스 등록 해제 |
 | `claude plugin validate (플러그인경로)` | 플러그인 형식 검사 |
 
 ---
@@ -208,11 +207,11 @@ Claude Code **입력창**에서 쓰는 명령 (슬래시 `/`로 시작):
 
 **저장소 구조** (이 폴더 안):
 ```
-claude-code_persona/
+claude-code_persona-setting/
 ├── README.md                         ← 지금 이 문서
 ├── GUIDE.md                          ← 더 자세한 가이드·FAQ
 ├── .claude-plugin/marketplace.json   ← 플러그인 목록(마켓플레이스 정의)
-└── persona-plugin/                   ← 실제 플러그인
+└── persona-plugin/                   ← 실제 플러그인 (이 저장소의 유일한 플러그인)
     ├── .claude-plugin/plugin.json    ← 플러그인 정보
     ├── hooks/                        ← 항상 켜짐
     │   ├── hooks.json                  (언제 무엇을 실행할지)
@@ -226,7 +225,7 @@ claude-code_persona/
 ```
 
 **설치 후 실제 파일 위치** (Claude Code가 복사해 두는 곳):
-- Windows: `C:\Users\(사용자)\AppData\Roaming\claude-code\plugins\cache\claude-code-persona\persona-plugin\(버전)\`
+- Windows: `C:\Users\(사용자)\AppData\Roaming\claude-code\plugins\cache\claude-code-persona-setting\persona-plugin\(버전)\`
 - 👉 **수정은 위 저장소 폴더에서** 하고, **marketplace update + 재설치**로 이 캐시에 반영합니다 (직접 캐시를 고치지 마세요).
 
 ---
@@ -236,7 +235,7 @@ claude-code_persona/
 | 증상 | 원인 | 해결 |
 |---|---|---|
 | **페르소나가 안 켜진 것 같다** | 미설치/비활성/재시작 안 함 | `claude plugin list`로 `enabled` 확인 → 아니면 install/enable → **재시작** |
-| **파일을 고쳤는데 반영이 안 된다** | 설치본은 **캐시 복사본**이라 빌드 파일 수정이 자동 반영 안 됨 | `claude plugin marketplace update claude-code-persona` → `uninstall` → `install` → 재시작 |
+| **파일을 고쳤는데 반영이 안 된다** | 설치본은 **캐시 복사본**이라 빌드 파일 수정이 자동 반영 안 됨 | `claude plugin marketplace update claude-code-persona-setting` → `uninstall` → `install` → 재시작 |
 | **스킬(투자/변호사 등)이 안 뜬다** | 재시작 전이거나 트리거 단어 부족 | 재시작 후 `이 거래 검토해줘`처럼 명확히. `claude plugin details persona-plugin`로 스킬 인식 확인 |
 | **clone이 안 된다 / 권한 오류** | 비공개 저장소 로그인 필요 | `gh auth login` 후 다시 `git clone` |
 | **`uv: command not found` 같은 에러** | **다른 플러그인**의 hook 문제 (이 플러그인과 무관) | 무시 가능. 거슬리면 그 플러그인을 점검 |
@@ -251,8 +250,8 @@ claude-code_persona/
 - **이 플러그인은 비밀정보(API 키·토큰)를 담지 않습니다.** 페르소나 텍스트(성격·규칙)만 들어 있습니다.
 - **완전 제거(원래대로):**
   ```bash
-  claude plugin uninstall persona-plugin@claude-code-persona
-  claude plugin marketplace remove claude-code-persona
+  claude plugin uninstall persona-plugin@claude-code-persona-setting
+  claude plugin marketplace remove claude-code-persona-setting
   ```
   그 후 재시작하면 페르소나가 사라집니다.
 - **만든 사람의 PC 기준** 백업 위치(다른 PC엔 해당 없음):
@@ -262,15 +261,13 @@ claude-code_persona/
 
 ---
 
-## 13. 세팅 더 추가하기 (저장소 확장)
+## 13. 이 저장소의 범위 (페르소나 전용)
 
-이 저장소는 페르소나 외 **다른 Claude Code 세팅도 계속 쌓을 수 있는 그릇**입니다.
+이 저장소는 **오직 페르소나 플러그인(`persona-plugin`) 하나만**을 위한 곳입니다.
+다른 종류의 Claude Code 설정·플러그인을 여기에 섞지 않습니다.
 
-1. `claude-code_persona/`에 **새 플러그인 폴더**를 만듭니다 (`.claude-plugin/plugin.json` + 내용).
-2. 루트 `.claude-plugin/marketplace.json`의 `plugins` 배열에 **항목 1줄** 추가.
-3. `git commit` → `git push`. (기존 플러그인은 건드리지 않으므로 안전)
-
-원칙: **항상 켜져야 하는 것 = hook**, **상황에 따라 켜지는 것 = skill**.
+- 페르소나의 **성격·규칙·트리거를 고치는 법**은 [GUIDE.md의 "유지보수"](./GUIDE.md#3-유지보수-내용을-고치는-법)를 보세요.
+- 고친 뒤에는 `marketplace update → 재설치 → 재시작 → git push` 순서를 지킵니다.
 
 ---
 
