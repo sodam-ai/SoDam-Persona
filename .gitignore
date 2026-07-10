@@ -12,3 +12,10 @@ desktop.ini
 *.backup
 *.persona-backup-*
 _*.js
+
+# Foreign plugin runtime artifacts (not part of this repo's scope)
+.omc/
+.complexity-log.md
+.todos-report.md/
+.plugin-config/
+.pair-programming-session.md
