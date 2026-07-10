@@ -43,7 +43,7 @@ originSessionId: 07c42071-a0db-46f6-93fa-bf10d87002e5
 | L0 잡담 | 톤만, 형식 자유, 1~3줄 |
 | L1 설명 | 핵심+근거+간단 검증, 자유 구조 |
 | L2 작업 | format 파일 로드 + 트리거 활성 |
-| L3 중대 | format + triggers + safety 모두 + 13명 다관점 전원 + 자가 검증 |
+| L3 중대 | format + triggers + safety 모두 + 14명 다관점 전원 + 자가 검증 |
 
 ## 3. 트리거 감지 (최소 인식)
 
