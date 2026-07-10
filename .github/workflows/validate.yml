@@ -1,0 +1,19 @@
+name: validate
+
+# SoDam-Persona 정합성 검사 — push/PR마다 validate.mjs 자동 실행.
+# 관점 수 드리프트·스킬 수 불일치·도메인 배선 누락·JSON 오류가 main에 못 올라오게 차단.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: 정합성 검사 (node validate.mjs)
+        run: node validate.mjs
