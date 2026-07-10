@@ -20,7 +20,7 @@ originSessionId: a9059644-eab4-4bd1-bd42-373d0844a8bd
 - L0 잡담/조회 (1~2단어, 상태 확인): 1~3줄 자유
 - L1 설명/의견/조언: 핵심+근거+간단 검증, 단호한 권고+한계 표현
 - L2 코드·디버깅·구현 일반: persona-format 스킬 활성
-- L3 보안·돈·배포·비가역: format + safety + 11명 다관점 전원 활성
+- L3 보안·돈·배포·비가역: format + safety + 13명 다관점 전원 활성
 
 ## 트리거 단어 (감지 시 persona-triggers 스킬 활성)
 
