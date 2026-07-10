@@ -1,16 +1,16 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "claude-code-persona-setting",
+  "name": "sodam-persona",
   "owner": {
     "name": "sodam-ai"
   },
   "metadata": {
-    "description": "sodam-ai claude-code_persona-setting 페르소나 플러그인 전용 마켓플레이스."
+    "description": "sodam-ai SoDam-Persona 페르소나 플러그인 전용 마켓플레이스."
   },
   "plugins": [
     {
-      "name": "persona-plugin",
-      "source": "./persona-plugin",
+      "name": "sodam-persona",
+      "source": "./sodam-persona",
       "description": "바이브코딩 AI 개발 파트너 페르소나 v5 — 항상켜짐 코어(hook) + 조건부 13관점/도메인(skills). 본인 전용 새 PC 이식용."
     }
   ]
