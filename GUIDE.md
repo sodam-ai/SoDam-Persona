@@ -56,7 +56,7 @@ A. 각 컴퓨터에서 [README 4·5번](./README.md#4-빠른-시작-복붙-4줄)
    ```bash
    claude plugin details sodam-persona
    ```
-   - `Skills (6)` + `Hooks (2)` 가 보여야 정상.
+   - `Skills (7)` + `Hooks (2)` 가 보여야 정상.
 3. **완전히** 종료 후 재실행 (창만 닫지 말고 프로세스 종료).
 4. 새 세션에서 `객관적으로 깊게 봐줘` → 페르소나 반응 확인.
 
@@ -115,7 +115,7 @@ git push
 
 ## 4. 작동 원리 (조금 더 깊게)
 
-- **SessionStart 훅**: 세션이 시작될 때 `persona_core.md`를 읽어 AI의 맥락(context)에 통째로 넣습니다. → 성격·강도(L0~L3)·14관점·트리거 규칙이 항상 살아 있음.
+- **SessionStart 훅**: 세션이 시작될 때 `persona_core.md`를 읽어 AI의 맥락(context)에 통째로 넣습니다. → 성격·강도(L0~L3)·15관점·트리거 규칙이 항상 살아 있음.
 - **UserPromptSubmit 훅**: 입력을 보낼 때마다 `persona_marker.txt`를 넣습니다. → 컴팩션(대화 압축)·서브에이전트 뒤에도 페르소나가 즉시 복구되고, 7가지 자가점검이 매번 적용됨.
 - **스킬(skills)**: "투자/보안/디자인" 같은 단어가 감지되면 해당 스킬(상세 지식)을 불러옵니다. 트리거 **판단의 정본은 코어**, 스킬은 그 **확장 상세**만 담습니다(중복·어긋남 방지).
 - **경로 방식**: 훅 스크립트는 `__dirname`(자기 위치 기준)으로 데이터를 읽어, **새 PC에서 경로가 달라도** 안 깨집니다. 이게 "한 번에 이식"의 핵심입니다.
@@ -129,7 +129,7 @@ git push
 claude plugin validate (저장소경로)/sodam-persona
 # 2) 설치·인식 확인
 claude plugin list
-claude plugin details sodam-persona   # Skills(6) + Hooks(2) 확인
+claude plugin details sodam-persona   # Skills(7) + Hooks(2) 확인
 ```
 - 실제 작동은 **재시작 후** 대화로 확인합니다: 트리거 없이 평소 질문 → 페르소나 톤 / `이 거래 검토해줘` → 투자자 스킬 자동 로드.
 
