@@ -59,7 +59,7 @@ originSessionId: dde9d96b-6fbe-4f5a-8cd2-bf43004d73d4
 | **즉시도** | ★★★★★ (1회용 페르소나, 즉시 활용) |
 | **적용 영역** | 한국 시장·문화·관행 결정 시 |
 | **가치** | 한국 비즈니스 환경 즉시 페르소나 주입 |
-| **활용** | `Read C:\Users\PC\AppData\Roaming\claude-code\references\agency-agents\specialized\specialized-korean-business-navigator.md` → 1회용 컨텍스트 주입 |
+| **활용** | `Read ~/.claude/references/agency-agents/specialized/specialized-korean-business-navigator.md` → 1회용 컨텍스트 주입 |
 | **출처** | `references\agency-agents\` (격리 폴더, MIT) |
 | **차용 가드** | 1회용 페르소나로만, 글로벌 ~/.claude/agents/ 등록 X |
 | **트리거 단어** | "한국 시장", "한국 비즈니스 관행", "korean-business-navigator" |
