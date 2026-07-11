@@ -19,3 +19,9 @@ _*.js
 .todos-report.md/
 .plugin-config/
 .pair-programming-session.md
+
+# Internal backlog / planning notes — excluded from distribution (kept locally)
+sodam-persona/reference/v5_candidates.md
+sodam-persona/reference/v5_decision_gates.md
+sodam-persona/reference/v5_project_assets.md
+sodam-persona/reference/v5_quick_wins.md
