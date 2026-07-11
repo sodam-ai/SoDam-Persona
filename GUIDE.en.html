@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SoDam-Persona — Guide (English)</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root { --fg:#1f2328; --bg:#ffffff; --muted:#59636e; --border:#d1d9e0; --code-bg:#f6f8fa; --link:#0969da; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --bg:#0d1117; --muted:#9198a1; --border:#3d444d; --code-bg:#161b22; --link:#4493f8; } }
+    * { box-sizing: border-box; }
+    body { margin:0; padding:2rem 1rem 4rem; color:var(--fg); background:var(--bg);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.7; font-size:16px; -webkit-text-size-adjust:100%; }
+    body > * { max-width: 900px; margin-left:auto; margin-right:auto; }
+    h1,h2,h3 { line-height:1.3; margin-top:1.8em; }
+    h1 { font-size:2rem; border-bottom:2px solid var(--border); padding-bottom:.3em; }
+    h2 { font-size:1.5rem; border-bottom:1px solid var(--border); padding-bottom:.3em; }
+    h3 { font-size:1.2rem; }
+    a { color:var(--link); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    code { background:var(--code-bg); padding:.2em .4em; border-radius:6px; font-size:.88em;
+      font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace; }
+    pre { background:var(--code-bg); padding:1rem; border-radius:8px; overflow-x:auto; border:1px solid var(--border); }
+    pre code { background:none; padding:0; }
+    table { border-collapse:collapse; width:100%; display:block; overflow-x:auto; margin:1em 0; }
+    th,td { border:1px solid var(--border); padding:.5em .8em; text-align:left; }
+    th { background:var(--code-bg); }
+    blockquote { margin:1em 0; padding:.4em 1em; border-left:4px solid var(--border); color:var(--muted); background:var(--code-bg); border-radius:0 6px 6px 0; }
+    details { background:var(--code-bg); border:1px solid var(--border); border-radius:8px; padding:.6em 1em; margin:1em 0; }
+    summary { cursor:pointer; font-weight:600; }
+    hr { border:none; border-top:1px solid var(--border); margin:2em 0; }
+    img { max-width:100%; }
+    @media (max-width:600px){ body{ padding:1rem .8rem 3rem; font-size:15px; } h1{font-size:1.6rem;} h2{font-size:1.3rem;} }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">SoDam-Persona — Guide (English)</h1>
+</header>
+<h1 id="sodam-persona--beginners-guide-guide">SoDam-Persona — Beginner's
+Guide (GUIDE)</h1>
+<p>A companion to <a href="./README.en.md">README.en.md</a>. It contains
+the <strong>FAQ</strong>, <strong>situational troubleshooting
+recipes</strong>, <strong>maintenance</strong>, and <strong>how it
+works</strong>. Organized so that people new to computers, AI, and
+GitHub can look things up whenever they get stuck. Korean: <strong><a
+href="./GUIDE.md">GUIDE.md</a></strong></p>
+<blockquote>
+<p>This repository is <strong>dedicated to the persona plugin
+(<code>sodam-persona</code>)</strong> only. No other settings are mixed
+in. <strong>Public repository · Apache-2.0 · © 2026 SoDam AI
+Studio</strong></p>
+</blockquote>
+<hr />
+<h2 id="bookmark_tabs-table-of-contents">📑 Table of Contents</h2>
+<ol type="1">
+<li><a href="#1-if-its-your-first-time-5-min-summary">If it's your first
+time (5-min summary)</a></li>
+<li><a href="#2-faq">FAQ</a></li>
+<li><a href="#3-situational-troubleshooting-recipes">Situational
+troubleshooting recipes</a></li>
+<li><a href="#4-maintenance-how-to-edit-the-content">Maintenance: how to
+edit the content</a></li>
+<li><a href="#5-how-it-works-a-bit-deeper">How it works (a bit
+deeper)</a></li>
+<li><a href="#6-how-to-verify-that-it-installed-correctly">How to verify
+(that it installed correctly)</a></li>
+<li><a href="#7-glossary">Glossary</a></li>
+<li><a href="#8-license--commercial-use">License · commercial
+use</a></li>
+</ol>
+<hr />
+<h2 id="1-if-its-your-first-time-5-min-summary">1. If it's your first
+time (5-min summary)</h2>
+<p>Assume you just turned on the computer and know nothing. Just follow
+the steps.</p>
+<ol type="1">
+<li><strong>Open Claude Code.</strong> (If you don't have it, install
+first from <a
+href="https://claude.com/claude-code">claude.com/claude-code</a>)</li>
+<li>In the <strong>input box</strong> at the bottom, paste these 3 lines
+<strong>one at a time</strong>, pressing Enter each time:
+<pre><code>/plugin marketplace add sodam-ai/SoDam-Persona
+/plugin install sodam-persona@sodam-persona
+/reload-plugins</code></pre></li>
+<li><strong>Fully quit Claude Code and reopen it.</strong> (Very
+important — this is what turns it on.)</li>
+<li>In a new chat, just ask as usual. e.g.
+<code>How do I file this VAT?</code> → If the AI answers like a tax
+expert and adds a <strong>"consult a tax accountant"</strong> note at
+the end, it's working.</li>
+</ol>
+<blockquote>
+<p>💡 That's all. No hard commands to memorize — just <strong>ask in
+plain words</strong> and the persona applies itself.</p>
+</blockquote>
+<hr />
+<h2 id="2-faq">2. FAQ</h2>
+<p><strong>Q. What changes on my computer when I install it?</strong> A.
+<code>sodam-persona</code> is added to Claude Code's plugin list, and
+from new sessions the AI is auto-injected with the personality/rules. No
+other programs or files are touched.</p>
+<p><strong>Q. Do I really need the internet?</strong> A. <strong>Only
+for install (download).</strong> After that, the persona runs locally on
+your computer.</p>
+<p><strong>Q. Any passwords or API keys inside? Is it safe to make
+public?</strong> A. It only has persona text (personality/rules) and
+<strong>no secrets</strong>. So it's safe as a Public repository. (A
+secret scan confirmed 0 hits.)</p>
+<p><strong>Q. Does it cost more tokens?</strong> A. The always-on part
+is very light. The heavy personality body is injected <strong>once at
+session start</strong>. Skills like "investment/tax/security" load
+<strong>only when that topic comes up</strong>, using tokens only
+then.</p>
+<p><strong>Q. Does it conflict with other plugins?</strong> A. The
+persona is set to "ignore other plugins' auto-skill suggestions," but
+<strong>its own skills (persona-*) are an exception and
+auto-activate</strong>. So the persona takes priority without
+conflict.</p>
+<p><strong>Q. How do I turn it off?</strong> A. Briefly: say
+<code>just answer</code> or <code>persona off</code> in the chat. Fully:
+<code>claude plugin disable sodam-persona@sodam-persona</code>, then
+restart.</p>
+<p><strong>Q. How do I use it identically on multiple
+computers?</strong> A. On each computer, follow the 3 lines in <a
+href="./README.en.md#4-download--quick-start-3-lines">README Section
+4</a>.</p>
+<p><strong>Q. Can I trust tax/legal answers as-is?</strong> A.
+<strong>No.</strong> The persona's tax/legal answers are <strong>for
+general information only</strong>, and a "consult a professional" note
+is automatically attached. Before actually filing or signing, always get
+confirmation from a tax accountant, lawyer, or other professional.</p>
+<p><strong>Q. Can I use it commercially?</strong> A.
+<strong>Yes.</strong> The Apache-2.0 license permits commercial use,
+provided you keep the copyright/license notice and mark any files you
+changed (<a href="#8-license--commercial-use">Section 8</a>).</p>
+<hr />
+<h2 id="3-situational-troubleshooting-recipes">3. Situational
+troubleshooting recipes</h2>
+<h3 id="red_circle-i-restarted-but-the-persona-seems-off">🔴 "I
+restarted but the persona seems off"</h3>
+<ol type="1">
+<li>Check install/active state:
+<pre><code>claude plugin list</code></pre>
+<ul>
+<li>Not in the list → not installed → <a
+href="./README.en.md#4-download--quick-start-3-lines">README Section
+4</a></li>
+<li><code>disabled</code> →
+<code>claude plugin enable sodam-persona@sodam-persona</code></li>
+</ul></li>
+<li>Check component recognition:
+<pre><code>claude plugin details sodam-persona</code></pre>
+<ul>
+<li><code>Skills (7)</code> + <code>Hooks (2)</code> should appear.</li>
+</ul></li>
+<li>Fully quit and relaunch (quit the program itself, not just close the
+window).</li>
+<li>In a new session, <code>Review this objectively and deeply</code> →
+check the persona reaction.</li>
+</ol>
+<h3 id="red_circle-install-says-marketplace-not-found-common">🔴
+"<code>install</code> says 'Marketplace not found'" (common)</h3>
+<p>Cause: a previous <strong>uninstall</strong> also removed the
+marketplace registration. Fix — <strong>register again
+first</strong>:</p>
+<pre><code>/plugin marketplace add sodam-ai/SoDam-Persona
+/plugin install sodam-persona@sodam-persona
+/reload-plugins</code></pre>
+<p>👉 Always <strong>add (register) → install → reload
+(apply)</strong>.</p>
+<h3
+id="red_circle-i-edited-the-content-but-its-unchanged-most-common">🔴 "I
+edited the content but it's unchanged" (most common)</h3>
+<p>Cause: the installed copy is a <strong>cache</strong>. Editing only
+the source folder leaves the cache old. In order:</p>
+<pre><code>claude plugin marketplace update sodam-persona
+claude plugin uninstall sodam-persona@sodam-persona
+claude plugin install sodam-persona@sodam-persona</code></pre>
+<p>Then <strong>restart</strong>. (You can also check that the
+cache-folder files contain your edits.)</p>
+<h3 id="red_circle-i-cant-install-directly-from-github">🔴 "I can't
+install directly from GitHub"</h3>
+<ul>
+<li>Use the exact repo name: <code>sodam-ai/SoDam-Persona</code>
+(including case).</li>
+<li>Check your internet. Company/school networks may block GitHub.</li>
+<li>If it still fails, <strong>download then install locally</strong>:
+clone the repo or download the ZIP, unzip it, and run
+<code>/plugin marketplace add (folder path)</code>.</li>
+</ul>
+<h3 id="yellow_circle-i-get-a-uv-command-not-found-error">🟡 "I get a
+<code>uv: command not found</code> error"</h3>
+<ul>
+<li>This comes from <strong>another plugin's Stop hook</strong> failing
+to find <code>uv</code> (a Python tool), and is <strong>unrelated to
+this persona plugin</strong> (which has no such hook). It doesn't affect
+the persona.</li>
+</ul>
+<h3
+id="yellow_circle-it-feels-like-my-whole-settings-stopped-working">🟡
+"It feels like my whole settings stopped working"</h3>
+<ul>
+<li><code>settings.json</code> becomes <strong>entirely void if even one
+character of JSON is wrong</strong>.</li>
+<li>Validate the JSON; if broken, restore from backup (<a
+href="./README.en.md#16-safety--backup--removal-rollback">README Section
+16</a>).</li>
+</ul>
+<hr />
+<h2 id="4-maintenance-how-to-edit-the-content">4. Maintenance: how to
+edit the content</h2>
+<p><strong>To change personality/rules</strong> → edit
+<code>sodam-persona/hooks/persona_core.md</code> (the always-on source).
+<strong>To add trigger words</strong> → add to the trigger list in the
+same <code>persona_core.md</code> (single source in the core).
+<strong>To change a specific expert's detail</strong> → edit
+<code>sodam-persona/skills/persona-(name)/SKILL.md</code>.</p>
+<p>After editing, <strong>always</strong> follow this order:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Edit files in the repo folder</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Consistency check (recommended — auto-verifies perspective/skill counts and disclaimer)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> validate.mjs</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) Reflect into the cache</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin marketplace update sodam-persona</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin uninstall sodam-persona@sodam-persona</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin install sodam-persona@sodam-persona</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Restart Claude Code</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 5) Push to GitHub (⚠️ add ONLY the files you changed — do NOT use &#39;git add -A&#39;)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add sodam-persona/hooks/persona_core.md   <span class="co"># example: only the files you actually changed</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;fix: summary of change&quot;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
+<blockquote>
+<p>⚠️ <strong>Why avoid <code>git add -A</code>?</strong> It can sweep
+in <strong>unintended files</strong> (temporary files left by other
+tools) and pollute the public repo. <strong>Name only the files you
+changed</strong> when adding. ⚠️ <strong>Don't skip cache
+reflection.</strong> Skipping step 3 keeps the old version on (the most
+common misunderstanding).</p>
+</blockquote>
+<hr />
+<h2 id="5-how-it-works-a-bit-deeper">5. How it works (a bit deeper)</h2>
+<ul>
+<li><strong>SessionStart hook</strong> (<code>inject-core.js</code>):
+when a session starts, it reads <code>persona_core.md</code> and puts it
+into the AI's context wholesale. → personality, strength (L0–L3), 15
+perspectives, triggers, and the disclaimer rule stay alive at all
+times.</li>
+<li><strong>UserPromptSubmit hook</strong>
+(<code>inject-marker.js</code>): on every input it injects
+<code>persona_marker.txt</code>. → after compaction (conversation
+compression) or sub-agents, the persona is instantly restored, and the
+<strong>7 self-checks</strong> and <strong>mandatory disclaimer</strong>
+apply every time.</li>
+<li><strong>Skills (7)</strong>: when words like
+"investment/tax/security/design" are detected, the matching skill
+(detailed knowledge) loads. The <strong>source of truth for trigger
+judgment is the core</strong>; skills hold only its <strong>extended
+detail</strong> (preventing duplication/drift).</li>
+<li><strong>Mandatory disclaimer</strong>: for accounting/tax (#14) and
+legal (#11) <strong>actionable answers</strong> (filing, amount
+calculation, clause interpretation, judgment), a "consult a
+professional" note is always included. Because this rule lives in the
+<strong>always-on core/marker</strong> rather than a conditional skill,
+it works reliably regardless of whether the skill loaded.</li>
+<li><strong>Path approach</strong>: hook scripts read data via
+<code>__dirname</code> (relative to themselves), so they <strong>don't
+break even if paths differ</strong> on a new PC. This is the key to
+"one-shot migration."</li>
+</ul>
+<hr />
+<h2 id="6-how-to-verify-that-it-installed-correctly">6. How to verify
+(that it installed correctly)</h2>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Validate plugin format</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin validate <span class="er">(</span><span class="ex">repo</span> path<span class="kw">)</span><span class="ex">/sodam-persona</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Confirm install/recognition</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin list</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin details sodam-persona   <span class="co"># check Skills (7) + Hooks (2)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) (For developers) automatic consistency &amp; disclaimer check</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> validate.mjs                      <span class="co"># verifies 15 perspectives · 20 patterns · 7 skills · disclaimer present</span></span></code></pre></div>
+<ul>
+<li>Verify actual behavior <strong>after a restart</strong>, via
+conversation:
+<ul>
+<li>Ask normally without triggers → persona tone (careful,
+evidence-driven)</li>
+<li><code>Review this trade</code> → investor skill auto-loads</li>
+<li><code>Review this VAT filing</code> → tax skill + <strong>a
+disclaimer note at the end</strong> (its presence means the latest
+version is working)</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="7-glossary">7. Glossary</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>context</strong></td>
+<td>The range of conversation/info the AI holds at once</td>
+</tr>
+<tr>
+<td><strong>compaction</strong></td>
+<td>Auto-summarizing/compressing when the conversation gets long (the
+marker restores the persona)</td>
+</tr>
+<tr>
+<td><strong>hook</strong></td>
+<td>A command that runs automatically at a certain point</td>
+</tr>
+<tr>
+<td><strong>skill</strong></td>
+<td>A bundle of knowledge/instructions loaded when needed</td>
+</tr>
+<tr>
+<td><strong>marketplace</strong></td>
+<td>The plugin catalog (warehouse)</td>
+</tr>
+<tr>
+<td><strong>cache</strong></td>
+<td>A copy kept for speed (the installed version lives here)</td>
+</tr>
+<tr>
+<td><strong>JSON</strong></td>
+<td>A format for writing settings; one wrong bracket/comma breaks the
+whole file</td>
+</tr>
+<tr>
+<td><strong>L0–L3</strong></td>
+<td>Answer-strength levels (L0 chat → L3 serious work like
+security/money/deploy)</td>
+</tr>
+<tr>
+<td><strong>disclaimer</strong></td>
+<td>A liability-limiting note like "for reference; consult a
+professional"</td>
+</tr>
+<tr>
+<td><strong>trigger</strong></td>
+<td>A word that switches on the related perspective/skill</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-license--commercial-use">8. License · commercial use</h2>
+<ul>
+<li><strong>License</strong>: <a href="./LICENSE">Apache License 2.0</a>
+· © 2026 SoDam AI Studio</li>
+<li><strong>Commercial use allowed</strong> — provided you ① keep
+copyright &amp; license notices ② include a copy of the LICENSE ③ state
+changes in modified files.</li>
+<li><strong>AS IS (no warranty)</strong> — no warranty is given for this
+plugin or its output (including tax/legal), and responsibility for
+outcomes lies with the user.</li>
+<li>For details see <a
+href="./README.en.md#17-license--copyright--commercial-use">README
+Section 17</a>; full text in <a href="./LICENSE">LICENSE</a>;
+third-party attributions in <a href="./NOTICE">NOTICE</a>.</li>
+</ul>
+<h3 id="how-far-can-i-use-it-for-beginners">How far can I use it? (for
+beginners)</h3>
+<ul>
+<li>✅ <strong>Allowed</strong>: personal use, <strong>commercial
+use</strong>, delivery to a company/client, training materials, forking
+(copying), redistribution, selling — all fine (Apache-2.0).</li>
+<li>📌 <strong>Must keep</strong>: copyright/license notices, include
+the <code>LICENSE</code> file, and <strong>mark changed files as
+"changed."</strong></li>
+<li>🔎 <strong>Verify yourself</strong>: ① originality/copyright of
+AI-generated parts ② how you use trademarks like "Claude" ③ Claude Code
+/ Anthropic <strong>terms, pricing, model policy</strong> ④ licenses of
+any fonts/images/icons you add later.</li>
+<li>🚫 <strong>Don't</strong>: present trademarks like Anthropic's as
+<strong>affiliation/endorsement</strong>, or <strong>include others'
+code/images/text without permission</strong>.</li>
+<li>⚖️ <strong>When unsure</strong>: for important uses such as client
+delivery, <strong>independent legal review is recommended</strong>.
+<strong>This document is not legal advice.</strong></li>
+</ul>
+<hr />
+<p><em>If you get stuck, just ask with the symptom. — © 2026 SoDam AI
+Studio · Docs: <a href="./GUIDE.md">한국어</a> / English</em></p>
+</body>
+</html>
