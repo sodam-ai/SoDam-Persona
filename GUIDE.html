@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SoDam-Persona — 가이드 (한국어)</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root { --fg:#1f2328; --bg:#ffffff; --muted:#59636e; --border:#d1d9e0; --code-bg:#f6f8fa; --link:#0969da; }
+    @media (prefers-color-scheme: dark){ :root{ --fg:#e6edf3; --bg:#0d1117; --muted:#9198a1; --border:#3d444d; --code-bg:#161b22; --link:#4493f8; } }
+    * { box-sizing: border-box; }
+    body { margin:0; padding:2rem 1rem 4rem; color:var(--fg); background:var(--bg);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.7; font-size:16px; -webkit-text-size-adjust:100%; }
+    body > * { max-width: 900px; margin-left:auto; margin-right:auto; }
+    h1,h2,h3 { line-height:1.3; margin-top:1.8em; }
+    h1 { font-size:2rem; border-bottom:2px solid var(--border); padding-bottom:.3em; }
+    h2 { font-size:1.5rem; border-bottom:1px solid var(--border); padding-bottom:.3em; }
+    h3 { font-size:1.2rem; }
+    a { color:var(--link); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    code { background:var(--code-bg); padding:.2em .4em; border-radius:6px; font-size:.88em;
+      font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace; }
+    pre { background:var(--code-bg); padding:1rem; border-radius:8px; overflow-x:auto; border:1px solid var(--border); }
+    pre code { background:none; padding:0; }
+    table { border-collapse:collapse; width:100%; display:block; overflow-x:auto; margin:1em 0; }
+    th,td { border:1px solid var(--border); padding:.5em .8em; text-align:left; }
+    th { background:var(--code-bg); }
+    blockquote { margin:1em 0; padding:.4em 1em; border-left:4px solid var(--border); color:var(--muted); background:var(--code-bg); border-radius:0 6px 6px 0; }
+    details { background:var(--code-bg); border:1px solid var(--border); border-radius:8px; padding:.6em 1em; margin:1em 0; }
+    summary { cursor:pointer; font-weight:600; }
+    hr { border:none; border-top:1px solid var(--border); margin:2em 0; }
+    img { max-width:100%; }
+    @media (max-width:600px){ body{ padding:1rem .8rem 3rem; font-size:15px; } h1{font-size:1.6rem;} h2{font-size:1.3rem;} }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">SoDam-Persona — 가이드 (한국어)</h1>
+</header>
+<h1 id="sodam-persona--왕초보-가이드-guide">SoDam-Persona — 왕초보
+가이드 (GUIDE)</h1>
+<p><a href="./README.md">README.md</a>의 보충 문서입니다. <strong>자주
+묻는 질문(FAQ)</strong>, <strong>상황별 문제 해결 레시피</strong>,
+<strong>유지보수 방법</strong>, <strong>작동 원리</strong>를 담았습니다.
+컴퓨터·AI·깃허브를 처음 다루는 분 기준으로, 막히는 순간마다 찾아볼 수
+있게 정리했습니다. 영어: <strong><a
+href="./GUIDE.en.md">GUIDE.en.md</a></strong></p>
+<blockquote>
+<p>이 저장소는 <strong>페르소나 플러그인(<code>sodam-persona</code>)
+전용</strong>입니다. 다른 설정은 섞지 않습니다. <strong>공개(Public)
+저장소 · Apache-2.0 · © 2026 SoDam AI Studio</strong></p>
+</blockquote>
+<hr />
+<h2 id="bookmark_tabs-목차">📑 목차</h2>
+<ol type="1">
+<li><a href="#1-처음이라면-5분-요약">처음이라면 (5분 요약)</a></li>
+<li><a href="#2-자주-묻는-질문-faq">자주 묻는 질문 (FAQ)</a></li>
+<li><a href="#3-상황별-문제-해결-레시피">상황별 문제 해결
+레시피</a></li>
+<li><a href="#4-유지보수-내용을-고치는-법">유지보수: 내용을 고치는
+법</a></li>
+<li><a href="#5-작동-원리-조금-더-깊게">작동 원리 (조금 더
+깊게)</a></li>
+<li><a href="#6-검증하는-법-제대로-깔렸는지">검증하는 법 (제대로
+깔렸는지)</a></li>
+<li><a href="#7-용어-사전">용어 사전</a></li>
+<li><a href="#8-라이선스--상업적-용도">라이선스 · 상업적 용도</a></li>
+</ol>
+<hr />
+<h2 id="1-처음이라면-5분-요약">1. 처음이라면 (5분 요약)</h2>
+<p>컴퓨터를 켜고 아무것도 모르는 상태라고 가정하고, 순서만 따라
+하세요.</p>
+<ol type="1">
+<li><strong>Claude Code를 켭니다.</strong> (없으면 <a
+href="https://claude.com/claude-code">claude.com/claude-code</a> 에서
+먼저 설치)</li>
+<li>화면 맨 아래 <strong>입력칸</strong>에 아래 3줄을 <strong>한
+줄씩</strong> 붙여넣고 매번 Enter:
+<pre><code>/plugin marketplace add sodam-ai/SoDam-Persona
+/plugin install sodam-persona@sodam-persona
+/reload-plugins</code></pre></li>
+<li><strong>Claude Code를 완전히 껐다가 다시 켭니다.</strong> (아주 중요
+— 이래야 켜집니다)</li>
+<li>새 대화에서 그냥 평소처럼 질문하면 됩니다. 예:
+<code>이 부가세 신고 어떻게 해</code> → AI가 세무 전문가처럼 답하고 끝에
+<strong>"세무사 확인 권장"</strong> 안내가 붙으면 정상입니다.</li>
+</ol>
+<blockquote>
+<p>💡 이게 전부입니다. 어려운 명령을 외울 필요 없이, <strong>평소 말로
+질문</strong>하면 페르소나가 알아서 적용됩니다.</p>
+</blockquote>
+<hr />
+<h2 id="2-자주-묻는-질문-faq">2. 자주 묻는 질문 (FAQ)</h2>
+<p><strong>Q. 설치하면 내 컴퓨터에 뭐가 바뀌나요?</strong> A. Claude
+Code의 플러그인 목록에 <code>sodam-persona</code>이 추가되고, 새
+세션부터 AI에게 성격·규칙이 자동 주입됩니다. 다른 프로그램이나 파일은
+건드리지 않습니다.</p>
+<p><strong>Q. 인터넷이 꼭 필요한가요?</strong> A.
+<strong>설치(다운로드)할 때만</strong> 필요합니다. 설치 후 페르소나 작동
+자체는 로컬(내 컴퓨터)에서 돌아갑니다.</p>
+<p><strong>Q. 비밀번호나 API 키가 들어 있나요? 공개돼도
+안전한가요?</strong> A. 페르소나 텍스트(성격·규칙)만 있고
+<strong>비밀정보는 없습니다.</strong> 그래서 공개(Public) 저장소로 둬도
+안전합니다. (실제로 비밀정보 스캔에서 0건 확인)</p>
+<p><strong>Q. 토큰(요금)이 더 드나요?</strong> A. 항상 켜지는 부분은
+매우 가볍습니다. 무거운 성격 본문은 <strong>세션 시작 때 한 번</strong>
+주입됩니다. "투자/세무/보안" 같은 스킬은 <strong>그 주제가 나올
+때만</strong> 불러와 그때만 토큰을 씁니다.</p>
+<p><strong>Q. 다른 플러그인과 충돌하나요?</strong> A. 페르소나는 "외부
+플러그인의 자동 스킬 권유는 무시"하도록 되어 있지만, <strong>자기 자신의
+스킬(persona-*)은 예외로 자동 활성</strong>합니다. 그래서 충돌 없이
+페르소나가 우선합니다.</p>
+<p><strong>Q. 끄고 싶으면요?</strong> A. 잠깐: 대화에서
+<code>그냥 답해</code> 또는 <code>페르소나 끄고</code>. 완전히:
+<code>claude plugin disable sodam-persona@sodam-persona</code> 후
+재시작.</p>
+<p><strong>Q. 여러 대의 컴퓨터에서 똑같이 쓰려면?</strong> A. 각
+컴퓨터에서 <a href="./README.md#4-다운로드--빠른-시작-복붙-3줄">README
+4번</a> 3줄을 그대로 따라 하면 동일하게 적용됩니다.</p>
+<p><strong>Q. 세무·법률 답변을 그대로 믿어도 되나요?</strong> A.
+<strong>아니요.</strong> 이 페르소나의 세무·법률 답변은 <strong>일반
+정보 제공용</strong>이며, 답변에도 "전문가 최종 확인 권장" 문구가
+자동으로 붙습니다. 실제 신고·계약 전에는 반드시 세무사·변호사 등
+전문가의 확인을 받으세요.</p>
+<p><strong>Q. 상업적으로 사용해도 되나요?</strong> A.
+<strong>네.</strong> Apache-2.0 라이선스라 상업적 사용이 허용됩니다. 단
+저작권·라이선스 고지를 유지하고, 파일을 바꿨으면 바꿨다고 표시해야
+합니다(<a href="#8-라이선스--상업적-용도">8번</a>).</p>
+<hr />
+<h2 id="3-상황별-문제-해결-레시피">3. 상황별 문제 해결 레시피</h2>
+<h3 id="red_circle-재시작했는데-페르소나가-안-켜진-것-같아요">🔴
+"재시작했는데 페르소나가 안 켜진 것 같아요"</h3>
+<ol type="1">
+<li>설치·활성 확인:
+<pre><code>claude plugin list</code></pre>
+<ul>
+<li>목록에 없다 → 설치 안 됨 → <a
+href="./README.md#4-다운로드--빠른-시작-복붙-3줄">README 4번</a></li>
+<li><code>disabled</code> →
+<code>claude plugin enable sodam-persona@sodam-persona</code></li>
+</ul></li>
+<li>구성요소 인식 확인:
+<pre><code>claude plugin details sodam-persona</code></pre>
+<ul>
+<li><code>Skills (7)</code> + <code>Hooks (2)</code> 가 보여야
+정상.</li>
+</ul></li>
+<li><strong>완전히</strong> 종료 후 재실행 (창만 닫지 말고 프로그램
+자체를 종료).</li>
+<li>새 세션에서 <code>객관적으로 깊게 봐줘</code> → 페르소나 반응
+확인.</li>
+</ol>
+<h3
+id="red_circle-install-했더니-marketplace-not-found-라고-떠요-자주-발생">🔴
+"<code>install</code> 했더니 'Marketplace not found' 라고 떠요" (자주
+발생)</h3>
+<p>원인: 예전에 <strong>제거(Uninstall)</strong> 할 때 마켓플레이스
+등록까지 사라졌기 때문입니다. 해결 — <strong>등록부터 다시</strong>:</p>
+<pre><code>/plugin marketplace add sodam-ai/SoDam-Persona
+/plugin install sodam-persona@sodam-persona
+/reload-plugins</code></pre>
+<p>👉 항상 <strong>add(등록) → install(설치) → reload(적용)</strong>
+순서.</p>
+<h3 id="red_circle-내용을-고쳤는데-그대로예요-가장-흔함">🔴 "내용을
+고쳤는데 그대로예요" (가장 흔함)</h3>
+<p>원인: 설치본은 <strong>캐시(복사본)</strong> 입니다. 원본 폴더만
+고치면 캐시는 옛날 그대로입니다. 순서대로:</p>
+<pre><code>claude plugin marketplace update sodam-persona
+claude plugin uninstall sodam-persona@sodam-persona
+claude plugin install sodam-persona@sodam-persona</code></pre>
+<p>그 후 <strong>재시작</strong>. (확인: 캐시 폴더 파일이 수정 내용을
+담았는지 봐도 됩니다.)</p>
+<h3 id="red_circle-github에서-바로-설치가-안-돼요">🔴 "GitHub에서 바로
+설치가 안 돼요"</h3>
+<ul>
+<li>저장소 이름을 정확히: <code>sodam-ai/SoDam-Persona</code> (대소문자
+포함).</li>
+<li>인터넷 연결 확인. 회사·학교 네트워크는 GitHub 접근이 막혀 있을 수
+있습니다.</li>
+<li>그래도 안 되면 <strong>다운로드 후 로컬 설치</strong>: 저장소를
+clone 하거나 ZIP으로 받아 압축을 풀고, 그 폴더 경로로
+<code>/plugin marketplace add (폴더경로)</code>.</li>
+</ul>
+<h3 id="yellow_circle-uv-command-not-found-에러가-떠요">🟡
+"<code>uv: command not found</code> 에러가 떠요"</h3>
+<ul>
+<li>이건 <strong>다른 플러그인의 Stop 훅</strong>이
+<code>uv</code>(파이썬 도구)를 못 찾아 나는 것으로, <strong>이 페르소나
+플러그인과 무관</strong>합니다(이 플러그인엔 Stop 훅이 없음). 페르소나
+작동엔 영향 없습니다.</li>
+</ul>
+<h3 id="yellow_circle-설정이-통째로-안-먹는-느낌이에요">🟡 "설정이
+통째로 안 먹는 느낌이에요"</h3>
+<ul>
+<li><code>settings.json</code>은 <strong>JSON이 한 글자라도 틀리면 그
+파일 설정 전체가 무효</strong>가 됩니다.</li>
+<li>형식 검사 후, 깨졌으면 백업에서 복원(<a
+href="./README.md#16-안전--백업--제거롤백">README 16번</a>).</li>
+</ul>
+<hr />
+<h2 id="4-유지보수-내용을-고치는-법">4. 유지보수: 내용을 고치는 법</h2>
+<p><strong>성격·규칙을 바꾸려면</strong> →
+<code>sodam-persona/hooks/persona_core.md</code> 수정 (항상 켜지는
+정본). <strong>트리거 단어를 추가하려면</strong> → 같은
+<code>persona_core.md</code>의 트리거 목록에 추가 (정본은 코어 한 곳).
+<strong>특정 전문가 상세를 바꾸려면</strong> →
+<code>sodam-persona/skills/persona-(이름)/SKILL.md</code> 수정.</p>
+<p>수정 후 <strong>항상</strong> 이 순서를 지키세요:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) 저장소 폴더에서 파일 수정</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) 정합성 검사 (권장 — 관점 수·스킬 수·면책 존재 자동 확인)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> validate.mjs</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) 캐시에 반영</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin marketplace update sodam-persona</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin uninstall sodam-persona@sodam-persona</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin install sodam-persona@sodam-persona</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Claude Code 재시작</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 5) GitHub에 올리기 (⚠️ 바꾼 파일만 지정해서 add — &#39;git add -A&#39;는 쓰지 마세요)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add sodam-persona/hooks/persona_core.md   <span class="co"># 예시: 실제 바꾼 파일들만</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;fix: 수정 내용 요약&quot;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
+<blockquote>
+<p>⚠️ <strong>왜 <code>git add -A</code>를 피하나요?</strong> 폴더 안의
+<strong>의도치 않은 파일(다른 도구가 남긴 임시 파일 등)까지</strong>
+통째로 올라가 공개 저장소를 오염시킬 수 있습니다. <strong>바꾼 파일만
+이름을 적어</strong> add 하세요. ⚠️ <strong>캐시 반영을 빼먹지
+마세요.</strong> 위 3단계를 건너뛰면 예전 버전이 계속 켜집니다(가장 흔한
+착각).</p>
+</blockquote>
+<hr />
+<h2 id="5-작동-원리-조금-더-깊게">5. 작동 원리 (조금 더 깊게)</h2>
+<ul>
+<li><strong>SessionStart 훅</strong> (<code>inject-core.js</code>):
+세션이 시작될 때 <code>persona_core.md</code>를 읽어 AI의
+맥락(context)에 통째로 넣습니다. → 성격·강도(L0~L3)·15관점·트리거·면책
+규칙이 항상 살아 있음.</li>
+<li><strong>UserPromptSubmit 훅</strong>
+(<code>inject-marker.js</code>): 입력을 보낼 때마다
+<code>persona_marker.txt</code>를 넣습니다. → 컴팩션(대화
+압축)·서브에이전트 뒤에도 페르소나가 즉시 복구되고, <strong>7가지
+자가점검</strong>과 <strong>면책 강제</strong>가 매번 적용됨.</li>
+<li><strong>스킬(skills 7개)</strong>: "투자/세무/보안/디자인" 같은
+단어가 감지되면 해당 스킬(상세 지식)을 불러옵니다. 트리거 <strong>판단의
+정본은 코어</strong>, 스킬은 그 <strong>확장 상세</strong>만
+담습니다(중복·어긋남 방지).</li>
+<li><strong>면책 강제</strong>: 회계·세무(#14)·법률(#11) 도메인의
+<strong>실행성 답변</strong>(신고·금액계산·조항해석·판단)에는 "전문가
+최종 확인 권장" 문구가 반드시 포함됩니다. 이 규칙이 조건부 스킬이 아니라
+<strong>항상 켜지는 코어·마커</strong>에 들어 있어, 스킬 로드 여부와
+무관하게 안정적으로 작동합니다.</li>
+<li><strong>경로 방식</strong>: 훅 스크립트는
+<code>__dirname</code>(자기 위치 기준)으로 데이터를 읽어, <strong>새
+PC에서 경로가 달라도</strong> 안 깨집니다. 이게 "한 번에 이식"의
+핵심입니다.</li>
+</ul>
+<hr />
+<h2 id="6-검증하는-법-제대로-깔렸는지">6. 검증하는 법 (제대로
+깔렸는지)</h2>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) 플러그인 형식 검사</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin validate <span class="er">(</span><span class="ex">저장소경로</span><span class="kw">)</span><span class="ex">/sodam-persona</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) 설치·인식 확인</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin list</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> plugin details sodam-persona   <span class="co"># Skills (7) + Hooks (2) 확인</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) (개발자용) 정합성·면책 자동 검사</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> validate.mjs                      <span class="co"># 관점 15 · 패턴 20 · 스킬 7 · 면책 존재 확인</span></span></code></pre></div>
+<ul>
+<li>실제 작동은 <strong>재시작 후</strong> 대화로 확인합니다:
+<ul>
+<li>트리거 없이 평소 질문 → 페르소나 톤(신중·근거 중심)</li>
+<li><code>이 거래 검토해줘</code> → 투자자 스킬 자동 로드</li>
+<li><code>이 부가세 신고 봐줘</code> → 세무 스킬 + <strong>끝에 면책
+문구</strong> 확인 (이게 나오면 최신 버전 정상)</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="7-용어-사전">7. 용어 사전</h2>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>뜻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>컨텍스트(context)</strong></td>
+<td>AI가 한 번에 기억하는 대화·정보의 범위</td>
+</tr>
+<tr>
+<td><strong>컴팩션(compaction)</strong></td>
+<td>대화가 길어지면 자동으로 요약·압축하는 것 (마커가 페르소나를
+복구)</td>
+</tr>
+<tr>
+<td><strong>훅(hook)</strong></td>
+<td>특정 시점에 자동 실행되는 명령</td>
+</tr>
+<tr>
+<td><strong>스킬(skill)</strong></td>
+<td>필요할 때 불러오는 지식/지침 묶음</td>
+</tr>
+<tr>
+<td><strong>마켓플레이스(marketplace)</strong></td>
+<td>플러그인 목록(창고)</td>
+</tr>
+<tr>
+<td><strong>캐시(cache)</strong></td>
+<td>빠르게 쓰려고 복사해 둔 사본 (설치본이 여기 있음)</td>
+</tr>
+<tr>
+<td><strong>JSON</strong></td>
+<td>설정을 적는 형식. 괄호·쉼표 하나만 틀려도 전체가 깨짐</td>
+</tr>
+<tr>
+<td><strong>L0~L3</strong></td>
+<td>답변 강도 단계 (L0 잡담 → L3 보안·돈·배포 같은 중대 작업)</td>
+</tr>
+<tr>
+<td><strong>면책(disclaimer)</strong></td>
+<td>"참고용이며 전문가 확인 권장" 같은 책임 한계 안내 문구</td>
+</tr>
+<tr>
+<td><strong>트리거(trigger)</strong></td>
+<td>특정 단어가 나오면 관련 관점·스킬을 켜는 방아쇠</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-라이선스--상업적-용도">8. 라이선스 · 상업적 용도</h2>
+<ul>
+<li><strong>라이선스</strong>: <a href="./LICENSE">Apache License
+2.0</a> · © 2026 SoDam AI Studio</li>
+<li><strong>상업적 사용 가능</strong> — 단, ① 저작권·라이선스 고지 유지
+② LICENSE 사본 동봉 ③ 변경한 파일에 변경 사실 명시.</li>
+<li><strong>무보증(AS IS)</strong> — 본 플러그인과 그 출력(세무·법률 등
+포함)에 대해 어떠한 보증도 하지 않으며, 사용 결과의 책임은 사용자에게
+있습니다.</li>
+<li>자세한 항목은 <a
+href="./README.md#17-라이선스--저작권--상업적-용도">README 17번</a>,
+전문은 <a href="./LICENSE">LICENSE</a>, 제3자 고지는 <a
+href="./NOTICE">NOTICE</a>.</li>
+</ul>
+<h3 id="어디까지-써도-되나요-왕초보용">어디까지 써도 되나요?
+(왕초보용)</h3>
+<ul>
+<li>✅ <strong>써도 되는 것</strong>: 개인 사용, <strong>상업적
+사용</strong>, 회사·고객사 납품, 교육 자료, 포크(복제), 재배포, 판매 —
+모두 됩니다(Apache-2.0).</li>
+<li>📌 <strong>꼭 지킬 것</strong>: 저작권·라이선스 고지 유지,
+<code>LICENSE</code> 파일 동봉, <strong>바꾼 파일엔 "바꿨다"고
+표시</strong>.</li>
+<li>🔎 <strong>직접 확인할 것</strong>: ① AI로 만든 부분의 독창성·저작권
+② "Claude" 같은 <strong>상표</strong> 사용 방식 ③ Claude
+Code·Anthropic의 <strong>약관·요금·모델 정책</strong> ④ 나중에 추가하는
+폰트·이미지·아이콘의 라이선스.</li>
+<li>🚫 <strong>하면 안 되는 것</strong>: Anthropic 등의 상표를
+<strong>제휴/후원처럼</strong> 표기, 남의 코드·이미지·글을 <strong>무단
+포함</strong>.</li>
+<li>⚖️ <strong>애매하면</strong>: 회사 납품 등 중요한 용도라면
+<strong>법률 전문가 확인</strong>을 권장합니다. <strong>이 문서는 법률
+자문이 아닙니다.</strong></li>
+</ul>
+<hr />
+<p><em>막히는 부분이 있으면, 증상과 함께 물어보면 됩니다. — © 2026 SoDam
+AI Studio · 문서: 한국어(기본) / <a
+href="./GUIDE.en.md">English</a></em></p>
+</body>
+</html>
