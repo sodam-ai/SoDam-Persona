@@ -1,12 +1,12 @@
-# SoDam Persona for Codex
+# SoDam Persona
 
-**SoDam Persona**는 OpenAI의 AI 코딩 도우미인 **Codex**(사람의 말로 개발을 돕는 AI 프로그램)에 "신중하고 꼼꼼한 한국어 개발 파트너" 성격을 심어주는 부가 프로그램(플러그인, plugin — 원래 프로그램에 기능을 더해주는 작은 추가 프로그램)입니다.
+**SoDam Persona**는 Anthropic의 AI 코딩 도우미인 **Claude Code**(사람의 말로 개발을 돕는 AI 프로그램)에 "신중하고 꼼꼼한 한국어 개발 파트너" 성격을 심어주는 부가 프로그램(플러그인, plugin — 원래 프로그램에 기능을 더해주는 작은 추가 프로그램)입니다.
 
 컴퓨터·전자기기·AI·메신저를 처음 다루는 분도 이 문서만 따라오면 설치부터 실제 사용까지 끝까지 진행할 수 있도록, 낯선 용어가 처음 나올 때마다 `쉬운말(전문용어)` 형식으로 함께 풀어 적었습니다. 예: 저장소(repository, 코드와 문서를 모아두는 온라인 보관함).
 
-이 플러그인 자체는 별도의 AI가 아닙니다. Codex가 이미 갖고 있는 대화 능력 위에 "이렇게 판단하고 이렇게 답하라"는 규칙 문서를 자동으로 얹어주는 설정 모음입니다. 항상 켜지는 핵심 규칙(hook, 후크 — 특정 시점에 자동으로 실행되는 작은 프로그램) 2개와, 상황에 맞을 때만 불러오는 전문 지식 모음(skill, 스킬) 9개로 이루어져 있습니다.
+이 플러그인 자체는 별도의 AI가 아닙니다. Claude Code가 이미 갖고 있는 대화 능력 위에 "이렇게 판단하고 이렇게 답하라"는 규칙 문서를 자동으로 얹어주는 설정 모음입니다. 항상 켜지는 핵심 규칙(hook, 후크 — 특정 시점에 자동으로 실행되는 작은 프로그램) 2개와, 상황에 맞을 때만 불러오는 전문 지식 모음(skill, 스킬) 9개로 이루어져 있습니다.
 
-> **지금 버전**: `1.1.1` · **관점 수**: 15명 · **트리거 패턴**: 20개(A~T) · **스킬 수**: 9개 · **hook 수**: 2개 · **라이선스**: Apache License 2.0
+> **지금 버전**: `1.2.0` · **관점 수**: 15명 · **트리거 패턴**: 20개(A~T) · **스킬 수**: 9개 · **hook 수**: 2개 · **라이선스**: Apache License 2.0
 
 ---
 
@@ -38,14 +38,14 @@
 
 | # | 준비물 | 왜 필요한가 | 없으면 |
 |---|---|---|---|
-| 1 | Codex CLI(터미널에서 쓰는 버전) 또는 Codex 데스크톱 앱, 또는 Codex가 연결된 IDE(코드 편집기) 확장 | 이 플러그인은 Codex "안"에서 동작하는 부가 기능이라, Codex 자체가 먼저 있어야 합니다 | 플러그인을 설치할 대상이 없어 진행 불가 |
+| 1 | Claude Code CLI(터미널에서 쓰는 버전) 또는 Claude Code가 연결된 IDE(코드 편집기) 확장 | 이 플러그인은 Claude Code "안"에서 동작하는 부가 기능이라, Claude Code 자체가 먼저 있어야 합니다 | 플러그인을 설치할 대상이 없어 진행 불가 |
 | 2 | Node.js 18 이상 | hook 2개와 검증 스크립트(`validate.mjs`)가 JavaScript로 작성되어 Node.js가 실행 엔진 역할을 합니다 | hook이 실행되지 않아 페르소나가 전혀 동작하지 않음 |
-| 3 | Git(GitHub에서 설치할 경우에만 필요) | `codex plugin marketplace add sodam-ai/SoDam-Persona`처럼 GitHub 주소로 설치할 때 Codex 내부적으로 저장소를 내려받는 데 사용 | 로컬 저장소 설치 방식으로 대체 가능(Git 없이도 가능) |
+| 3 | Git(GitHub에서 설치할 경우에만 필요) | `/plugin marketplace add sodam-ai/SoDam-Persona`처럼 GitHub 주소로 설치할 때 Claude Code 내부적으로 저장소를 내려받는 데 사용 | 로컬 저장소 설치 방식으로 대체 가능(Git 없이도 가능) |
 | 4 | 터미널(명령어를 글자로 입력해 컴퓨터에 지시하는 검은 화면 프로그램) 사용 경험 아주 조금 | 설치 명령을 한 줄씩 입력하고 Enter를 누르는 정도만 할 수 있으면 충분 | 이 문서의 [실행 방법](#실행-방법)에서 터미널 여는 법부터 설명 |
 
 **운영체제**: Windows, macOS, Linux 어디서나 동작합니다. 이 문서의 명령 예시는 Windows PowerShell 기준이며, macOS/Linux는 같은 명령을 Terminal(터미널) 앱에 그대로 입력하면 됩니다.
 
-**계정**: Codex를 쓰기 위한 OpenAI 계정/구독은 이 플러그인과 별개로 이미 준비되어 있어야 합니다(이 플러그인은 계정을 만들어주거나 로그인을 대신 처리하지 않습니다).
+**계정**: Claude Code를 쓰기 위한 Anthropic 계정/구독은 이 플러그인과 별개로 이미 준비되어 있어야 합니다(이 플러그인은 계정을 만들어주거나 로그인을 대신 처리하지 않습니다).
 
 ---
 
@@ -55,12 +55,12 @@
 
 | 프로그램 | 최소 버전 | 다운로드 | 설치 확인 명령 |
 |---|---|---|---|
-| Codex CLI / 데스크톱 앱 | 최신 버전 | OpenAI 공식 웹사이트에서 "Codex" 검색 후 안내에 따라 설치 | (Codex 자체 안내에 따름) |
+| Claude Code | 최신 버전 | Anthropic 공식 웹사이트 또는 `npm install -g @anthropic-ai/claude-code` | `claude --version` |
 | Node.js | 18.0.0 이상 | `https://nodejs.org` (LTS 버전 권장) | `node --version` |
 | Git | 최신 버전 (GitHub 설치 시에만) | `https://git-scm.com` | `git --version` |
 | Pandoc (문서 편집자만, 선택) | 최신 버전 | `https://pandoc.org/installing.html` | `pandoc --version` |
 
-- **Codex CLI/데스크톱 앱**은 이 플러그인을 "실행할 무대"입니다. 반드시 먼저 설치·로그인까지 끝내주세요.
+- **Claude Code**는 이 플러그인을 "실행할 무대"입니다. 반드시 먼저 설치·로그인까지 끝내주세요.
 - **Node.js**는 일반 사용자에게도 필수입니다(hook 실행용). 설치 후 터미널을 새로 열어야 `node` 명령이 인식됩니다.
 - **Git**은 GitHub에서 설치하는 경우에만 필요합니다. 이 저장소를 이미 폴더로 갖고 있고 로컬 설치만 할 것이라면 없어도 됩니다.
 - **Pandoc**은 이 플러그인을 "사용"하는 데는 전혀 필요 없습니다. `README.md` 문서 내용을 고쳐서 `README.html`을 다시 만들 사람만 설치하면 됩니다.
@@ -76,7 +76,7 @@ git --version
 
 ### 환경 변수 안내
 
-이 플러그인은 사용자가 직접 설정해야 하는 환경 변수(API 키, `.env` 파일 등)가 **하나도 없습니다**(hook 스크립트 2개를 코드 기준으로 전수 확인한 결과 `process.env`를 읽는 코드가 없음). hook 명령의 `${PLUGIN_ROOT}`는 Codex가 실행 시점에 플러그인 설치 경로로 자동 치환해 주는 값이라, 사용자가 별도로 지정할 필요가 없습니다.
+이 플러그인은 사용자가 직접 설정해야 하는 환경 변수(API 키, `.env` 파일 등)가 **하나도 없습니다**(hook 스크립트 2개를 코드 기준으로 전수 확인한 결과 `process.env`를 읽는 코드가 없음). hook 명령의 `${CLAUDE_PLUGIN_ROOT}`는 Claude Code가 실행 시점에 플러그인 설치 경로로 자동 치환해 주는 값이라, 사용자가 별도로 지정할 필요가 없습니다.
 
 ---
 
@@ -86,7 +86,7 @@ git --version
 
 ### 방법 A — GitHub에서 곧바로 설치 (다운로드 단계 없음, 권장)
 
-Codex가 설치 시점에 저장소를 알아서 가져오므로, 사람이 미리 파일을 내려받을 필요가 없습니다. 바로 [설치 방법](#설치-방법)의 "GitHub에서 설치"로 이동하세요.
+Claude Code가 설치 시점에 저장소를 알아서 가져오므로, 사람이 미리 파일을 내려받을 필요가 없습니다. 바로 [설치 방법](#설치-방법)의 "GitHub에서 설치"로 이동하세요.
 
 ### 방법 B — 저장소를 내 컴퓨터에 먼저 내려받은 뒤 로컬 설치
 
@@ -109,42 +109,42 @@ Codex가 설치 시점에 저장소를 알아서 가져오므로, 사람이 미�
 
 ### GitHub에서 설치 (권장)
 
-터미널을 열고 아래 두 줄을 순서대로 입력합니다(각 줄 입력 후 Enter).
+Claude Code를 실행한 뒤, 대화창에 아래 두 줄을 순서대로 입력합니다(각 줄 입력 후 Enter).
 
-```powershell
-codex plugin marketplace add sodam-ai/SoDam-Persona
-codex plugin add sodam-persona@sodam-persona
+```text
+/plugin marketplace add sodam-ai/SoDam-Persona
+/plugin install sodam-persona@sodam-persona
 ```
 
 - 1번째 줄: "이 GitHub 저장소를 플러그인 후보 목록(마켓플레이스, marketplace)에 등록해줘"라는 뜻.
-- 2번째 줄: "등록된 후보 중 `sodam-persona` 플러그인을 실제로 설치해줘"라는 뜻. `sodam-persona@sodam-persona`에서 `@` 앞은 플러그인 이름, 뒤는 그 플러그인이 속한 마켓플레이스 이름입니다(이 저장소는 둘 다 `sodam-persona`로 같습니다).
+- 2번째 줄: "등록된 후보 중 `sodam-persona` 플러그인을 실제로 설치해줘"라는 뜻. `sodam-persona@sodam-persona`에서 `@` 앞은 플러그인 이름, 뒤는 그 플러그인이 속한 마켓플레이스 이름입니다(이 저장소는 둘 다 `sodam-persona`로 같습니다). 설치 화면에서 User/Project/Local 중 설치 범위(scope)를 고르라고 뜨면, 개인적으로만 쓸 것이라면 **User**를 선택하면 됩니다.
+
+설치 결과 메시지가 `Plugin is now active.`이면 바로 적용된 것이고, `Run /reload-plugins to activate.`이면 아래 명령을 한 번 더 입력해야 합니다.
+
+```text
+/reload-plugins
+```
 
 ### 로컬 저장소에서 설치
 
-[다운로드 방법](#다운로드-방법)의 방법 B로 저장소를 이미 내려받았다면, 그 폴더(저장소 루트) 안에서 터미널을 열고 아래를 입력합니다.
+[다운로드 방법](#다운로드-방법)의 방법 B로 저장소를 이미 내려받았다면, 그 폴더(저장소 루트)에서 Claude Code를 실행한 뒤 대화창에 아래를 입력합니다.
 
-```powershell
-codex plugin marketplace add .
-codex plugin add sodam-persona@sodam-persona
+```text
+/plugin marketplace add .
+/plugin install sodam-persona@sodam-persona
 ```
 
 `.`(마침표 하나)은 "지금 내가 있는 이 폴더"라는 뜻입니다.
 
-### 설치 뒤 신뢰 승인 (반드시 필요)
+### 설치 뒤 신뢰 확인
 
-설치만으로는 아직 끝난 것이 아닙니다.
-
-1. 새 Codex task(작업 세션)를 하나 시작합니다.
-2. 이 플러그인의 hook(자동 실행 규칙)이 처음 활성화되려는 순간, Codex가 "이 hook을 신뢰하시겠습니까?" 같은 확인 창을 띄웁니다.
-3. hook 내용(무엇을 하는지)을 확인한 뒤 **허용**을 선택해야 항상 켜짐 코어가 실제로 동작합니다.
-
-이 승인 절차는 Codex 자체의 안전장치이며, 이 플러그인이 우회하거나 생략할 수 없습니다([보안과 데이터 흐름](#보안과-데이터-흐름) 참고).
+Claude Code는 플러그인과 마켓플레이스를 "사용자 권한으로 임의 코드를 실행할 수 있는 고신뢰 구성요소"로 취급합니다. `/plugin marketplace add`·`/plugin install` 실행 시 출처(이 경우 `sodam-ai/SoDam-Persona` GitHub 저장소)를 신뢰하는지 확인하는 절차를 거치며, 신뢰하는 출처에서만 설치를 진행해야 합니다([보안과 데이터 흐름](#보안과-데이터-흐름) 참고).
 
 ### 설치 확인
 
-```powershell
-codex plugin marketplace list
-codex plugin list
+```text
+/plugin marketplace list
+/plugin list
 ```
 
 첫 번째 명령은 등록된 마켓플레이스 목록을, 두 번째 명령은 실제로 설치된 플러그인 목록을 보여줍니다. 둘 다에서 `sodam-persona`가 보이면 설치가 정상적으로 끝난 것입니다.
@@ -155,11 +155,10 @@ codex plugin list
 
 이미 사전 준비물을 다 갖췄고, 세세한 설명 없이 바로 시작하고 싶은 분을 위한 5단계 요약입니다.
 
-1. 터미널을 연다.
-2. `codex plugin marketplace add sodam-ai/SoDam-Persona` 입력 후 Enter.
-3. `codex plugin add sodam-persona@sodam-persona` 입력 후 Enter.
-4. 새 Codex task를 시작하고, hook 신뢰 확인 창이 뜨면 **허용**을 누른다.
-5. 그냥 평소처럼 한국어로 말을 건다. 예: `이 코드에서 버그 찾아줘` — 특별한 명령어를 외울 필요 없이 자연어(사람이 평소 쓰는 말) 그대로 사용하면 페르소나가 자동으로 판단해서 반응합니다.
+1. 터미널에서 `claude`를 입력해 Claude Code를 연다.
+2. `/plugin marketplace add sodam-ai/SoDam-Persona` 입력 후 Enter.
+3. `/plugin install sodam-persona@sodam-persona` 입력 후 Enter. (`Run /reload-plugins to activate.`라고 뜨면 `/reload-plugins`도 입력)
+4. 그냥 평소처럼 한국어로 말을 건다. 예: `이 코드에서 버그 찾아줘` — 특별한 명령어를 외울 필요 없이 자연어(사람이 평소 쓰는 말) 그대로 사용하면 페르소나가 자동으로 판단해서 반응합니다.
 
 막히면 [문제와 오류 대처 방법](#문제와-오류-대처-방법)으로 바로 이동하세요.
 
@@ -167,23 +166,17 @@ codex plugin list
 
 ## 실행 방법
 
-"플러그인을 실행한다"는 개념은 따로 없습니다. 이 플러그인은 **Codex를 실행하고 대화를 시작하는 순간 자동으로 함께 동작**합니다. 즉, "실행 방법"은 곧 "Codex를 여는 방법"입니다.
+"플러그인을 실행한다"는 개념은 따로 없습니다. 이 플러그인은 **Claude Code를 실행하고 대화를 시작하는 순간 자동으로 함께 동작**합니다. 즉, "실행 방법"은 곧 "Claude Code를 여는 방법"입니다.
 
-### 터미널에서 Codex CLI로 실행
+### 터미널에서 Claude Code CLI로 실행
 
 1. 터미널(윈도우는 PowerShell 또는 명령 프롬프트, macOS는 Terminal 앱)을 연다.
-2. `codex`라고 입력하고 Enter를 누른다(정확한 실행 명령은 설치한 Codex CLI 버전의 공식 안내를 따른다).
-3. 새 task(작업 세션)가 열리면, 그 세션 시작 시점에 이 플러그인의 SessionStart hook이 자동으로 실행되어 페르소나 코어를 주입합니다.
-
-### Codex 데스크톱 앱으로 실행
-
-1. 설치된 Codex 앱 아이콘을 실행한다.
-2. 새 대화(작업)를 시작한다.
-3. 마찬가지로 세션 시작 시점에 hook이 자동으로 실행됩니다.
+2. `claude`라고 입력하고 Enter를 누른다.
+3. 새 세션이 열리면, 그 세션 시작 시점에 이 플러그인의 SessionStart hook이 자동으로 실행되어 페르소나 코어를 주입합니다.
 
 ### IDE(코드 편집기) 확장으로 실행
 
-Codex가 연결된 IDE 확장을 쓰는 경우, IDE 안에서 Codex 패널을 열고 새 세션을 시작하면 동일하게 적용됩니다.
+Claude Code가 연결된 IDE 확장을 쓰는 경우, IDE 안에서 Claude Code 패널을 열고 새 세션을 시작하면 동일하게 적용됩니다.
 
 ### 터미널을 처음 쓰는 분을 위한 아주 기본적인 안내 (Windows 기준)
 
@@ -198,7 +191,7 @@ Codex가 연결된 IDE 확장을 쓰는 경우, IDE 안에서 Codex 패널을 �
 
 ### 아무것도 외우지 않고 쓰는 방법 (기본)
 
-평소 Codex에게 말하듯 한국어로 자연스럽게 요청하면 됩니다. 페르소나 코어가 항상 켜져 있어 자동으로 적용되고, 요청 내용이 특정 전문 skill의 설명과 맞아떨어지면 해당 skill이 조건 없이 자동으로 함께 불려옵니다.
+평소 Claude Code에게 말하듯 한국어로 자연스럽게 요청하면 됩니다. 페르소나 코어가 항상 켜져 있어 자동으로 적용되고, 요청 내용이 특정 전문 skill의 설명과 맞아떨어지면 해당 skill이 조건 없이 자동으로 함께 불려옵니다.
 
 ```text
 이 코드에서 버그 좀 찾아줘
@@ -208,20 +201,20 @@ Codex가 연결된 IDE 확장을 쓰는 경우, IDE 안에서 Codex 패널을 �
 
 ### 특정 전문가 관점을 직접 지정하고 싶을 때
 
-`$` 뒤에 skill 이름을 붙여 명시적으로 부를 수 있습니다.
+`/sodam-persona:<skill 이름>` 형식으로 명시적으로 부를 수 있습니다.
 
 ```text
-$persona-investor 이 자동매매 로직의 손실 시나리오를 검토해줘
-$persona-lawyer 이 서비스 약관의 위험 조항을 찾아줘
-$persona-accountant 이 비용을 경비 처리할 수 있는지 검토해줘
-$persona-marketer 이 랜딩페이지 카피를 개선해줘
-$persona-create 새 의료 도메인 페르소나를 추가해줘
-$persona-edit 투자자 트리거에 "리밸런싱"을 추가해줘
+/sodam-persona:persona-investor 이 자동매매 로직의 손실 시나리오를 검토해줘
+/sodam-persona:persona-lawyer 이 서비스 약관의 위험 조항을 찾아줘
+/sodam-persona:persona-accountant 이 비용을 경비 처리할 수 있는지 검토해줘
+/sodam-persona:persona-marketer 이 랜딩페이지 카피를 개선해줘
+/sodam-persona:persona-create 새 의료 도메인 페르소나를 추가해줘
+/sodam-persona:persona-edit 투자자 트리거에 "리밸런싱"을 추가해줘
 ```
 
 ### 사용 가능한 skill 목록 확인
 
-Codex CLI와 IDE 확장에서는 `/skills`라고 입력하거나, `$`만 입력하면 지금 쓸 수 있는 skill 목록이 화면에 뜹니다.
+대화창에 `/`만 입력하면 지금 쓸 수 있는 명령·skill 목록이 화면에 뜹니다. 이 플러그인의 항목은 `sodam-persona:`로 시작합니다.
 
 ### 응답 강도를 내가 직접 조절하고 싶을 때
 
@@ -238,28 +231,31 @@ Codex CLI와 IDE 확장에서는 `/skills`라고 입력하거나, `$`만 입력�
 
 ## 명령어
 
-### Codex 플러그인 관리 명령 (터미널에 입력)
+### Claude Code 플러그인 관리 명령 (대화창에 입력)
 
 | 명령 | 설명 |
 |---|---|
-| `codex plugin marketplace add <출처>` | 마켓플레이스(플러그인 후보 목록)에 등록. `<출처>`는 `sodam-ai/SoDam-Persona`처럼 GitHub 저장소 이름이거나 `.`처럼 로컬 폴더 경로 |
-| `codex plugin marketplace list` | 등록된 마켓플레이스 목록 확인 |
-| `codex plugin marketplace upgrade sodam-persona` | 마켓플레이스에 등록된 소스를 최신 상태로 갱신 |
-| `codex plugin add sodam-persona@sodam-persona` | 실제로 플러그인을 설치 |
-| `codex plugin list` | 현재 설치된 플러그인 목록 확인 |
-| `codex plugin remove sodam-persona@sodam-persona` | 플러그인 제거 |
+| `/plugin marketplace add <출처>` | 마켓플레이스(플러그인 후보 목록)에 등록. `<출처>`는 `sodam-ai/SoDam-Persona`처럼 GitHub 저장소 이름이거나 `.`처럼 로컬 폴더 경로 |
+| `/plugin marketplace list` | 등록된 마켓플레이스 목록 확인 |
+| `/plugin marketplace update sodam-persona` | 마켓플레이스에 등록된 소스를 최신 상태로 갱신 |
+| `/plugin install sodam-persona@sodam-persona` | 실제로 플러그인을 설치 |
+| `/plugin list` | 현재 설치된 플러그인 목록 확인 |
+| `/plugin uninstall sodam-persona@sodam-persona` | 플러그인 제거 |
+| `/reload-plugins` | 설치·제거 후 재시작 없이 즉시 반영 |
 
-### 페르소나 skill 호출 (Codex 대화창에 입력)
+터미널에서 세션 밖에 직접 실행하는 스크립팅용 명령도 있습니다: `claude plugin install sodam-persona@sodam-persona`, `claude plugin marketplace update sodam-persona` 등(`claude plugin` 다음에 동일한 하위 명령을 붙이면 됨).
+
+### 페르소나 skill 호출 (Claude Code 대화창에 입력)
 
 | 명령 | 설명 |
 |---|---|
-| `/skills` 또는 `$` | 지금 쓸 수 있는 skill 목록 보기 |
-| `$persona-investor <내용>` | 전문 투자자 관점(#13) 명시 호출 |
-| `$persona-lawyer <내용>` | 전문 변호사 관점(#11) 명시 호출 |
-| `$persona-accountant <내용>` | 회계·세무 전문가 관점(#14) 명시 호출 |
-| `$persona-marketer <내용>` | 마케팅·세일즈 전문가 관점(#15) 명시 호출 |
-| `$persona-create` | 인터뷰 방식으로 새 도메인 페르소나(16번째~) 생성 |
-| `$persona-edit` | 인터뷰 방식으로 기존 페르소나의 트리거 단어 추가·수정·제거 |
+| `/` (슬래시만 입력) | 지금 쓸 수 있는 명령·skill 목록 보기 |
+| `/sodam-persona:persona-investor <내용>` | 전문 투자자 관점(#13) 명시 호출 |
+| `/sodam-persona:persona-lawyer <내용>` | 전문 변호사 관점(#11) 명시 호출 |
+| `/sodam-persona:persona-accountant <내용>` | 회계·세무 전문가 관점(#14) 명시 호출 |
+| `/sodam-persona:persona-marketer <내용>` | 마케팅·세일즈 전문가 관점(#15) 명시 호출 |
+| `/sodam-persona:persona-create` | 인터뷰 방식으로 새 도메인 페르소나(16번째~) 생성 |
+| `/sodam-persona:persona-edit` | 인터뷰 방식으로 기존 페르소나의 트리거 단어 추가·수정·제거 |
 
 ### 문서/코드 편집자 전용 명령 (저장소 루트에서 실행)
 
@@ -349,11 +345,11 @@ L1 이상의 모든 응답에서, 아래 15개 관점 중 그 작업과 관련 �
 ### 평소 대화의 흐름 (매 세션)
 
 ```text
-1. Codex 세션(task) 시작
+1. Claude Code 세션 시작
        │
        ▼
 2. SessionStart hook 실행 (inject-core.js)
-   → persona_core.md 전문을 세션 컨텍스트에 주입 (최초 1회, 신뢰 승인 필요)
+   → persona_core.md 전문을 세션 컨텍스트에 주입 (매 세션 최초 1회)
        │
        ▼
 3. 사용자가 메시지 입력
@@ -364,7 +360,7 @@ L1 이상의 모든 응답에서, 아래 15개 관점 중 그 작업과 관련 �
    → 대화가 길어지거나(compaction) 서브에이전트를 거친 뒤에도 페르소나를 즉시 복구하는 역할
        │
        ▼
-5. Codex가 주입된 규칙 + 사용자 발화를 함께 해석
+5. Claude Code가 주입된 규칙 + 사용자 발화를 함께 해석
    → 응답 강도(L0~L3) 판정, 트리거 단어 매칭
        │
        ▼
@@ -379,10 +375,10 @@ L1 이상의 모든 응답에서, 아래 15개 관점 중 그 작업과 관련 �
 8. 응답 전 자가 검증 체크리스트 통과 확인 후 전달
 ```
 
-### 새 도메인 페르소나를 추가하는 흐름 (`$persona-create`)
+### 새 도메인 페르소나를 추가하는 흐름 (`/sodam-persona:persona-create`)
 
 ```text
-1. $persona-create 호출
+1. /sodam-persona:persona-create 호출
        │
        ▼
 2. 인터뷰 진행 (한 번에 한 질문)
@@ -401,14 +397,14 @@ L1 이상의 모든 응답에서, 아래 15개 관점 중 그 작업과 관련 �
 5. node validate.mjs 실행 → ✅ PASS 나올 때까지 반복 수정
        │
        ▼
-6. 설치 캐시 재반영 안내 (marketplace upgrade → remove → add → 새 task)
+6. 설치 캐시 재반영 안내 (marketplace update → uninstall → install → /reload-plugins)
        │
        ▼
 7. 변경된 파일만 정확히 지정해 git add → conventional commit
    (실제 push·PR·merge는 사용자의 명시적 승인 없이 실행하지 않음)
 ```
 
-`$persona-edit`도 대상이 기본 관점(표 한 줄만) 또는 도메인 페르소나(최대 4~5곳)로 다르지만, 편집 후 검증(4단계) → 안내(5단계) 흐름은 동일합니다.
+`/sodam-persona:persona-edit`도 대상이 기본 관점(표 한 줄만) 또는 도메인 페르소나(최대 4~5곳)로 다르지만, 편집 후 검증(4단계) → 안내(5단계) 흐름은 동일합니다.
 
 ---
 
@@ -416,23 +412,18 @@ L1 이상의 모든 응답에서, 아래 15개 관점 중 그 작업과 관련 �
 
 ### 플러그인 개념 이해하기
 
-Codex의 "플러그인"은 다음 4가지 요소로 이루어진 하나의 묶음입니다.
+Claude Code의 "플러그인"은 다음 4가지 요소로 이루어진 하나의 묶음입니다.
 
 - **마켓플레이스(marketplace)**: 플러그인이 어디서 왔는지 알려주는 목록 파일(marketplace.json이라는 이름의 파일). "GitHub 저장소"이거나 "내 컴퓨터의 폴더 경로"일 수 있습니다.
 - **매니페스트(manifest)**: 플러그인의 이름·버전·설명이 담긴 파일(plugin.json이라는 이름의 파일).
 - **hook**: 특정 시점(세션 시작 등)에 자동으로 실행되는 작은 프로그램.
 - **skill**: 특정 상황에서만 조건부로 불러오는 지식 문서.
 
-### 이 저장소가 Claude Code용 파일도 함께 갖고 있는 이유
-
-이 프로젝트는 원래 Claude Code(다른 AI 코딩 도구)의 플러그인으로 시작했다가 Codex 전용으로 이식(porting)되었습니다. 그 흔적으로 `plugins/sodam-persona/.claude-plugin/plugin.json`과 루트의 `.claude-plugin/marketplace.json`이 남아 있지만, **이 둘은 이전 호스트와의 호환을 위한 것일 뿐 Codex 설치 과정에서는 전혀 사용되지 않습니다.** Codex가 실제로 읽는 파일은 `.agents/plugins/marketplace.json`과 `plugins/sodam-persona/.codex-plugin/plugin.json`입니다.
-
 ### 저장소 전체 구조
 
 ```text
 .
-├── .agents/plugins/marketplace.json      # Codex가 실제로 읽는 마켓플레이스 정의 (정본)
-├── .claude-plugin/marketplace.json       # [예전 호스트 호환용] Claude Code 마켓플레이스 정의
+├── .claude-plugin/marketplace.json       # Claude Code가 실제로 읽는 마켓플레이스 정의 (정본)
 ├── .github/workflows/validate.yml        # CI: push/PR마다 validate.mjs 자동 실행
 ├── LICENSE                               # Apache License 2.0 전문
 ├── NOTICE                                # 저작권·상표·제3자 인용 고지
@@ -443,8 +434,7 @@ Codex의 "플러그인"은 다음 4가지 요소로 이루어진 하나의 묶�
 ├── doc-theme.html                        # 위 스크립트가 쓰는 HTML 테마(CSS)
 ├── validate.mjs                          # 정합성 자동 검사기
 └── plugins/sodam-persona/                # 실제로 배포·설치되는 플러그인 본체
-    ├── .claude-plugin/plugin.json        # [예전 호스트 호환용] Claude Code 매니페스트
-    ├── .codex-plugin/plugin.json         # Codex 매니페스트 (정본)
+    ├── .claude-plugin/plugin.json        # 플러그인 매니페스트 (정본)
     ├── hooks/
     │   ├── hooks.json                    # SessionStart / UserPromptSubmit hook 등록표
     │   ├── inject-core.js                # SessionStart 시 실행되는 스크립트
@@ -469,7 +459,7 @@ Codex의 "플러그인"은 다음 4가지 요소로 이루어진 하나의 묶�
         └── test_scenarios.md             # 트리거 동작 검증용 발화 시나리오 모음
 ```
 
-`commands/` 폴더는 Claude Code 시절 workflow 원문을 보존한 내부 참조입니다. Codex에서는 이를 직접 slash 명령으로 실행하지 않고, `persona-create`/`persona-edit` skill이 그 내용을 읽어서 수행합니다.
+`commands/` 폴더는 `persona-create`/`persona-edit` skill이 읽어서 수행하는 절차 원문을 담고 있습니다.
 
 ### 자동 정합성 검사 (`validate.mjs`)가 지키는 10가지
 
@@ -483,7 +473,7 @@ Codex의 "플러그인"은 다음 4가지 요소로 이루어진 하나의 묶�
 | 4 | skill 폴더 수와 문서상 표기가 일치하고, 각 skill의 frontmatter `name`이 폴더명과 같은가 |
 | 4-1 | 영문 README의 skill 수·패턴 수 표기도 동일 기준으로 일치하는가 |
 | 5 | 도메인 페르소나 4종(투자·법률·회계세무·마케팅)이 코어와 마커 파일 양쪽에 모두 배선되어 있는가 |
-| 6 | `.codex-plugin/plugin.json`/`.agents/plugins/marketplace.json`이 유효한 JSON이고, 이름·소스 경로가 올바른가 |
+| 6 | `.claude-plugin/plugin.json`/`.claude-plugin/marketplace.json`이 유효한 JSON이고, 이름·소스 경로가 올바른가 |
 | 7 | 회계·세무(#14), 법률(#11) 답변에 필요한 면책 규칙이 실제로 존재하는가 |
 | 8 | (경고만, 실패 아님) HTML 4개 파일이 최신 수치와 어긋나 재생성이 필요해 보이는가 |
 | 9 | 문서 안에서 백틱으로 감싼 파일 참조가 실제로 존재하는 파일을 가리키는가(깨진 링크 방지) |
@@ -505,17 +495,17 @@ Codex의 "플러그인"은 다음 4가지 요소로 이루어진 하나의 묶�
 |---|---|
 | 플러그인 폴더 안의 고정된 텍스트 파일(`persona_core.md`, `persona_marker.txt`) 읽기 | 네트워크로 어디에도 접속하지 않음 |
 | 읽은 내용을 정해진 JSON 형식으로 표준출력에 내보내기 | 코드를 즉석에서 만들어 실행(`eval`)하지 않음 |
-| Codex가 stdin(표준입력)으로 보내는 hook 메타데이터를 끝까지 받은 뒤 응답(EPIPE 오류 방지 목적일 뿐, 그 내용을 저장하거나 활용하지 않음) | 외부 프로그램을 새로 실행하지 않음 |
+| Claude Code가 stdin(표준입력)으로 보내는 hook 메타데이터를 끝까지 받은 뒤 응답(EPIPE 오류 방지 목적일 뿐, 그 내용을 저장하거나 활용하지 않음) | 외부 프로그램을 새로 실행하지 않음 |
 | | 어떤 파일도 쓰거나 지우지 않음 |
 | | 사용자 데이터를 수집하거나 어디로도 전송하지 않음 |
 
 ### 신뢰 승인 절차
 
-플러그인을 설치했다고 hook이 곧바로 실행되는 것은 아닙니다. Codex가 최초 활성화 시점에 hook의 정확한 내용을 사용자에게 보여주고 승인을 받은 뒤에만 실행을 허용합니다. 이 절차는 Codex 플랫폼 자체의 안전장치이며, 이 플러그인이 임의로 건너뛸 수 없습니다.
+Claude Code는 플러그인과 마켓플레이스를 사용자 권한으로 코드를 실행할 수 있는 고신뢰 구성요소로 취급하며, 설치 시점에 출처를 신뢰하는지 확인합니다. 이 절차는 Claude Code 플랫폼 자체의 안전장치이며, 이 플러그인이 임의로 건너뛸 수 없습니다.
 
 ### 비가역 작업 게이트는 "행동 지침"이지 "시스템 방화벽"이 아님
 
-이 페르소나는 삭제·배포·강제 푸시·외부 발송 같은 되돌릴 수 없는 작업 앞에서 "자동 실행하지 말고 먼저 사용자에게 확인하라"는 **응답 습관과 판단 기준**을 Codex에게 지시합니다. 다만 이는 파일 시스템 접근을 물리적으로 차단하는 장치가 아니라, Codex가 원래 갖고 있는 승인·권한 체계 위에 "이럴 땐 반드시 멈춰서 물어봐라"는 규칙을 얹는 것입니다. 실제 최종 실행 권한과 승인 절차는 항상 Codex 플랫폼 자체의 정책을 따릅니다.
+이 페르소나는 삭제·배포·강제 푸시·외부 발송 같은 되돌릴 수 없는 작업 앞에서 "자동 실행하지 말고 먼저 사용자에게 확인하라"는 **응답 습관과 판단 기준**을 Claude Code에게 지시합니다. 다만 이는 파일 시스템 접근을 물리적으로 차단하는 장치가 아니라, Claude Code가 원래 갖고 있는 승인·권한 체계(도구 사용 권한 프롬프트 등) 위에 "이럴 땐 반드시 멈춰서 물어봐라"는 규칙을 얹는 것입니다. 실제 최종 실행 권한과 승인 절차는 항상 Claude Code 플랫폼 자체의 정책을 따릅니다.
 
 ### 데이터가 실제로 흘러가는 경로
 
@@ -525,15 +515,15 @@ Codex의 "플러그인"은 다음 4가지 요소로 이루어진 하나의 묶�
 플러그인이 주입한 페르소나 규칙 텍스트(로컬 파일에서 읽은 것)
         │
         ▼
-Codex가 사용하는 AI 모델 제공자로 대화 맥락 전송
-   (이는 이 플러그인 유무와 무관하게, Codex를 쓰는 이상 항상 발생하는
-    Codex 자체의 정상적인 동작 방식입니다)
+Claude Code가 사용하는 AI 모델(Claude)로 대화 맥락 전송
+   (이는 이 플러그인 유무와 무관하게, Claude Code를 쓰는 이상 항상 발생하는
+    Claude Code 자체의 정상적인 동작 방식입니다)
         │
         ▼
 응답 생성 후 사용자에게 반환
 ```
 
-이 플러그인 자체는 자신만의 서버나 원격 저장소로 아무것도 전송하지 않습니다. 개인정보를 수집하거나, 사용 기록을 원격으로 남기거나, 별도 분석(텔레메트리)을 수행하지 않습니다. 다만 Codex를 사용하는 이상 대화 내용이 Codex가 연동한 AI 모델 제공자에게 전달되는 것은 이 플러그인과 무관하게 항상 발생하는 일이며, 그 처리 방침은 해당 제공자(OpenAI 등)의 공식 개인정보처리방침을 따릅니다.
+이 플러그인 자체는 자신만의 서버나 원격 저장소로 아무것도 전송하지 않습니다. 개인정보를 수집하거나, 사용 기록을 원격으로 남기거나, 별도 분석(텔레메트리)을 수행하지 않습니다. 다만 Claude Code를 사용하는 이상 대화 내용이 Claude Code가 연동한 AI 모델 제공자(Anthropic)에게 전달되는 것은 이 플러그인과 무관하게 항상 발생하는 일이며, 그 처리 방침은 Anthropic의 공식 개인정보처리방침을 따릅니다.
 
 ### 개인정보·민감정보 보호 습관
 
@@ -563,7 +553,7 @@ Codex가 사용하는 AI 모델 제공자로 대화 맥락 전송
 | 새 페르소나 생성/편집 절차 원문 | `plugins/sodam-persona/commands/create.md`, `edit.md` |
 | 정합성 검사 스크립트 | 저장소 루트 `validate.mjs` |
 | 문서 HTML 재생성 스크립트 | 저장소 루트 `build-docs.mjs`, `doc-theme.html` |
-| Codex 마켓플레이스 정의(정본) | `.agents/plugins/marketplace.json` |
+| Claude Code 마켓플레이스 정의(정본) | `.claude-plugin/marketplace.json` |
 | CI(자동 검사) 설정 | `.github/workflows/validate.yml` |
 
 > 이 표에 없는 폴더(예: 개발 중 생긴 로컬 캐시·메모 파일)는 `.gitignore`에 등록되어 저장소에 포함되지 않으며, 이 플러그인을 새로 내려받는 사용자에게는 존재하지 않는 파일이므로 이 문서에서 다루지 않습니다.
@@ -575,7 +565,17 @@ Codex가 사용하는 AI 모델 제공자로 대화 맥락 전송
 날짜가 최신인 항목이 위에 오도록 정리했습니다. 항목을 클릭(또는 탭)하면 세부 내용이 펼쳐집니다.
 
 <details>
-<summary><strong>2026-08-09 — Codex 마켓플레이스 정식 패키징</strong></summary>
+<summary><strong>2026-08-17 — Claude Code 전용으로 원상복귀</strong></summary>
+
+- Codex는 별도 저장소에서 독립적으로 관리하기로 결정 — 이 저장소는 다시 Claude Code 전용 플러그인으로 확정.
+- `.codex-plugin/plugin.json`, `.agents/plugins/marketplace.json` 등 Codex 전용 파일 제거.
+- **치명적 버그 수정**: Codex 이식 과정에서 `hooks.json`의 Claude Code 변수 `${CLAUDE_PLUGIN_ROOT}`가 Codex 관례인 `${PLUGIN_ROOT}`로 잘못 바뀌어 있었음 — 이 상태로는 Claude Code에서 hook 자체가 실행되지 않는 상태였음. 원래 변수명으로 복원.
+- README·명령어 표기를 Claude Code 실제 명령 체계(`/plugin marketplace add`, `/plugin install`, `/reload-plugins` 등, 공식 문서 기준 검증)로 전면 갱신.
+
+</details>
+
+<details>
+<summary><strong>2026-08-09 — Codex 마켓플레이스 정식 패키징 (2026-08-17 원상복귀로 제거됨)</strong></summary>
 
 - `.agents/plugins/marketplace.json` 신설 — Codex가 실제로 읽는 마켓플레이스 정의를 정식으로 분리.
 - 플러그인 버전 `1.1.1`로 갱신.
@@ -594,7 +594,7 @@ Codex가 사용하는 AI 모델 제공자로 대화 맥락 전송
 <details>
 <summary><strong>2026-07-27 — 새 페르소나를 인터뷰로 직접 만들고 편집하는 기능 추가</strong></summary>
 
-- `$persona-create`, `$persona-edit` 인터뷰형 skill 신설 — 코드를 몰라도 대화로 새 도메인 전문가를 추가하거나 기존 트리거 단어를 고칠 수 있게 됨.
+- `persona-create`, `persona-edit` 인터뷰형 skill 신설 — 코드를 몰라도 대화로 새 도메인 전문가를 추가하거나 기존 트리거 단어를 고칠 수 있게 됨.
 - 새 페르소나 이름(영문 슬러그) 입력값 검증 추가 — 잘못된 형식이 파일 경로에 그대로 쓰이는 것을 방지(경로 조작 위험 차단).
 - 기존에 별도 문서였던 "초보자 가이드(GUIDE)"를 폐지하고 이 README 한 곳으로 통합.
 
@@ -651,13 +651,14 @@ Codex가 사용하는 AI 모델 제공자로 대화 맥락 전송
 
 | 증상 | 원인 | 해결 방법 |
 |---|---|---|
-| `codex plugin marketplace add .` 실행 시 실패 | 저장소 루트 폴더가 아닌 다른 위치에서 실행했거나, `.agents/plugins/marketplace.json`이 없음 | 저장소를 내려받은 폴더로 이동한 뒤(`README.md`가 보이는 위치) 다시 실행 |
-| 업데이트하려는데 "Marketplace not found" 오류 | `remove`를 `upgrade`보다 먼저 실행해서 마켓플레이스 등록 자체가 사라짐 | 반드시 **`upgrade` → `remove` → `add`** 순서를 지킬 것. 순서를 바꾸면 이 오류가 재현됩니다 |
-| 설치는 됐는데 페르소나가 전혀 활성화 안 되는 느낌 | 최초 hook 신뢰 승인 창을 놓치거나 거부함 | 새 task를 다시 시작해 신뢰 승인 창이 다시 뜨는지 확인하고 **허용**을 선택 |
-| 플러그인 코드를 고쳤는데 실제 대화에 반영이 안 됨 | 설치 캐시는 파일을 고친다고 자동으로 갱신되지 않음 | `codex plugin marketplace upgrade sodam-persona` → `codex plugin remove sodam-persona@sodam-persona` → `codex plugin add sodam-persona@sodam-persona` 순서로 재설치 후 새 task 시작 |
+| `/plugin marketplace add .` 실행 시 실패 | 저장소 루트 폴더가 아닌 다른 위치에서 실행했거나, `.claude-plugin/marketplace.json`이 없음 | 저장소를 내려받은 폴더로 이동한 뒤(`README.md`가 보이는 위치) 다시 실행 |
+| 재설치하려는데 "Marketplace not found" 오류 | `uninstall`을 `update`보다 먼저 실행해서 마켓플레이스 등록 자체가 사라짐 | 반드시 **`update` → `uninstall` → `install`** 순서를 지킬 것. 순서를 바꾸면 이 오류가 재현됩니다 |
+| 설치는 됐는데 페르소나가 전혀 활성화 안 되는 느낌 | 신뢰 확인을 놓쳤거나, 설치 후 `/reload-plugins`를 안 함 | `/plugin list`로 설치 확인 → `/reload-plugins` 실행 → 그래도 안 되면 새 세션 시작 |
+| 플러그인 코드를 고쳤는데 실제 대화에 반영이 안 됨 | 설치 캐시는 파일을 고친다고 자동으로 갱신되지 않음 | `/plugin marketplace update sodam-persona` → `/plugin uninstall sodam-persona@sodam-persona` → `/plugin install sodam-persona@sodam-persona` → `/reload-plugins` 순서로 재설치 |
 | 터미널에 `node`를 입력했더니 "인식할 수 없는 명령"이라고 나옴 | Node.js가 설치되지 않았거나, 설치 후 터미널을 새로 열지 않음 | `nodejs.org`에서 설치 후 열려 있던 터미널을 모두 닫고 새로 열기 |
 | `node build-docs.mjs` 실행 시 "pandoc이 설치되어 있지 않습니다" | Pandoc 미설치 | 문서를 직접 고칠 사람만 필요. 플러그인을 그냥 "쓰기"만 한다면 이 오류는 무시해도 됨. 고치려면 `pandoc.org/installing.html`에서 설치 |
-| `codex plugin marketplace add sodam-ai/SoDam-Persona` 실행 시 네트워크 오류 | Git 미설치, 저장소 이름 오탈자, 방화벽/프록시 차단 | `git --version`으로 Git 설치 확인 → 저장소 이름 철자 재확인 → 회사·학교망이라면 프록시 설정 확인 |
+| `/plugin marketplace add sodam-ai/SoDam-Persona` 실행 시 네트워크 오류 | Git 미설치, 저장소 이름 오탈자, 방화벽/프록시 차단 | `git --version`으로 Git 설치 확인 → 저장소 이름 철자 재확인 → 회사·학교망이라면 프록시 설정 확인 |
+| 플러그인 skill 이름을 쳤는데 안 뜸 | 설치 캐시가 오래돼 폴더 구조가 달라졌을 가능성 | `rm -rf ~/.claude/plugins/cache` 후 Claude Code 재시작 → 위 재설치 순서 다시 진행 |
 | `node validate.mjs` 실행 결과가 `❌ FAIL` | 관점 수·트리거 수·스킬 수 등 어딘가 숫자가 어긋남(주로 새 페르소나 추가/편집 도중) | 출력된 오류 목록을 한 줄씩 읽고, 표시된 파일을 직접 열어 숫자를 맞춘 뒤 다시 실행. [아키텍처](#아키텍처)의 "10가지 검사표"에서 각 번호의 의미를 확인 |
 | 회계·세무 또는 법률 답변에 면책 문구가 안 보임 | 예상된 동작이 아닌 실제 결함일 가능성이 높음 | 저장소의 GitHub Issue로 신고 권장. `validate.mjs` 검사 7번이 이런 회귀를 막기 위한 장치이므로, 최신 버전인지도 함께 확인 |
 | Windows PowerShell에서 명령을 입력했더니 경로 관련 오류 | 따옴표·백슬래시가 사람이 옮겨 적는 과정에서 바뀜 | 이 문서의 코드 블록을 그대로 복사해서 붙여넣기(직접 타이핑하지 말 것) |
@@ -674,19 +675,19 @@ A. 네. Apache License 2.0으로 공개된 무료 오픈소스이며, 개인·�
 A. 아니요. 이 플러그인의 hook은 플러그인 폴더 안 고정된 텍스트 파일 2개를 읽는 것 외에는 아무 파일도 쓰거나 지우지 않습니다. 삭제·배포처럼 되돌릴 수 없는 작업은 항상 사용자에게 먼저 확인을 구하도록 설계되어 있습니다. 자세히는 [보안과 데이터 흐름](#보안과-데이터-흐름) 참고.
 
 **Q. 인터넷 연결이 꼭 필요한가요?**
-A. Codex 자체가 AI 모델과 통신하기 위해 인터넷이 필요합니다. 다만 이 플러그인의 hook 자체는 로컬 파일만 읽을 뿐 별도로 인터넷에 접속하지 않습니다.
+A. Claude Code 자체가 AI 모델과 통신하기 위해 인터넷이 필요합니다. 다만 이 플러그인의 hook 자체는 로컬 파일만 읽을 뿐 별도로 인터넷에 접속하지 않습니다.
 
 **Q. 회계·세무나 법률 답변을 실제 전문가 상담 대신 써도 되나요?**
 A. 아니요. 이 페르소나는 실제 자격을 갖춘 세무사·회계사·변호사가 아닙니다. 참고용 정보 제공이 목적이며, 실행성 있는 판단(신고·계약 해석 등) 전에는 반드시 실제 전문가의 확인을 받아야 합니다. 답변에도 이 점이 면책 문구로 항상 함께 표시됩니다.
 
-**Q. Claude Code에서도 쓸 수 있나요?**
-A. 저장소 안에 예전 호환용 파일(`.claude-plugin/`)이 남아 있긴 하지만, 현재 이 프로젝트는 **Codex 전용으로 관리**되고 있으며 새 기능·트리거 갱신은 Codex 매니페스트를 기준으로 이뤄집니다. Claude Code 사용을 전제로 한 최신성은 보장하지 않습니다.
+**Q. Codex에서도 쓸 수 있나요?**
+A. 아니요. Codex 지원은 별도 저장소에서 독립적으로 관리되고 있으며, 이 저장소는 Claude Code 전용으로 관리됩니다. Codex를 쓰신다면 별도 저장소를 확인해 주세요.
 
 **Q. 여러 대의 컴퓨터에 설치해도 되나요?**
 A. 네. 이 플러그인은 자기완결적으로 설계되어 별도 개인 설정 파일이나 메모리 없이도, 새 컴퓨터에서 설치만 하면 동일하게 동작합니다.
 
 **Q. 트리거 단어를 제가 원하는 대로 추가하거나 바꾸고 싶어요.**
-A. `$persona-edit`(기존 관점 편집) 또는 `$persona-create`(완전히 새로운 전문 분야 추가)를 호출해 인터뷰 형식으로 진행하면 됩니다. [사용 방법](#사용-방법)과 [워크플로우](#워크플로우) 참고.
+A. `/sodam-persona:persona-edit`(기존 관점 편집) 또는 `/sodam-persona:persona-create`(완전히 새로운 전문 분야 추가)를 호출해 인터뷰 형식으로 진행하면 됩니다. [사용 방법](#사용-방법)과 [워크플로우](#워크플로우) 참고.
 
 **Q. 페르소나가 대답을 너무 길게/무겁게 해요.**
 A. "간단히", "짧게", "핵심만" 같은 단어를 말에 섞으면 그 즉시 짧은 형식으로 전환됩니다. 이 규칙은 다른 모든 규칙보다 우선순위가 가장 높습니다.
@@ -700,8 +701,8 @@ A. 저장소의 GitHub Issue 기능으로 신고해 주세요. 재현 가능한 
 **Q. 이 플러그인의 코드를 가져다 제 상업용 제품에 넣어도 되나요?**
 A. 네, Apache License 2.0이 이를 명시적으로 허용합니다. 다만 라이선스·저작권 고지 사본 포함, 수정한 파일에 변경 사실 명시 같은 몇 가지 조건이 있습니다. [법률, 저작권, 라이선스, 상업적 용도](#법률-저작권-라이선스-상업적-용도)에서 조건을 확인하세요. 이 안내는 참고용 요약이며 법률 자문이 아닙니다.
 
-**Q. 이 플러그인은 OpenAI가 만든 공식 기능인가요?**
-A. 아니요. 이 프로젝트는 OpenAI와 아무런 제휴·후원 관계가 없는 독립적인 커뮤니티 플러그인입니다. "Codex"와 "OpenAI"는 각 소유자의 상표이며, 이 문서에서는 그 제품을 가리키기 위한 목적으로만 이름을 사용했습니다.
+**Q. 이 플러그인은 Anthropic이 만든 공식 기능인가요?**
+A. 아니요. 이 프로젝트는 Anthropic과 아무런 제휴·후원 관계가 없는 독립적인 커뮤니티 플러그인입니다. "Claude"와 "Claude Code"는 각 소유자의 상표이며, 이 문서에서는 그 제품을 가리키기 위한 목적으로만 이름을 사용했습니다.
 
 **Q. 세션이 오래돼서 대화가 정리(compaction)되거나 서브에이전트를 거치면 페르소나가 사라지나요?**
 A. 아니요. `UserPromptSubmit` hook이 매 입력마다 압축된 마커를 다시 주입하도록 설계되어 있어, 그런 상황에서도 페르소나가 자동으로 복구됩니다.
@@ -754,7 +755,7 @@ Apache License 2.0은 아래 4가지를 **명시적으로 허용**합니다.
 
 ### 도메인 전문가 페르소나에 대한 중요한 법적 고지
 
-이 플러그인의 전문 투자자(#13)·전문 변호사(#11)·회계·세무 전문가(#14)·마케팅·세일즈 전문가(#15) 페르소나는 **실제 자격을 갖춘 전문가가 아니라 Codex의 AI 응답 스타일을 조정하는 소프트웨어 설정**입니다.
+이 플러그인의 전문 투자자(#13)·전문 변호사(#11)·회계·세무 전문가(#14)·마케팅·세일즈 전문가(#15) 페르소나는 **실제 자격을 갖춘 전문가가 아니라 Claude Code의 AI 응답 스타일을 조정하는 소프트웨어 설정**입니다.
 
 - 투자·거래 관련 응답은 투자 자문이 아니며, 실제 투자 결정과 그 결과에 대한 책임은 전적으로 사용자에게 있습니다.
 - 법률 관련 응답은 법률 자문이 아니며, 실제 법적 효력을 보장하지 않습니다. 계약·규제·컴플라이언스 판단 전에는 변호사의 확인을 받아야 합니다.
@@ -763,21 +764,21 @@ Apache License 2.0은 아래 4가지를 **명시적으로 허용**합니다.
 
 ### AI가 생성한 콘텐츠(코드·문서 등)를 사용할 때 주의할 점
 
-- 이 플러그인은 Codex의 응답 스타일을 조정할 뿐, Codex가 실제로 만들어내는 코드·문서·설명 등 AI 생성물의 저작권 상태를 보장하거나 대신 판단해주지 않습니다.
+- 이 플러그인은 Claude Code의 응답 스타일을 조정할 뿐, Claude Code가 실제로 만들어내는 코드·문서·설명 등 AI 생성물의 저작권 상태를 보장하거나 대신 판단해주지 않습니다.
 - AI가 생성한 결과물을 상업적 제품·서비스·납품물에 포함하기 전에는 아래를 **사용자가 직접 확인**해야 합니다.
   - 그 결과물이 기존 저작물과 실질적으로 유사하지 않은지(저작권 침해 가능성)
-  - 사용한 AI 서비스(Codex/OpenAI 등)의 이용약관이 그 결과물의 상업적 이용을 허용하는지
+  - 사용한 AI 서비스(Claude Code/Anthropic 등)의 이용약관이 그 결과물의 상업적 이용을 허용하는지
   - 결과물이 참조했을 수 있는 오픈소스 코드의 라이선스 조건과 충돌하지 않는지
 - 이 플러그인의 규칙 문서 자체도 AI 코딩 도구를 이용한 반복 작업 과정에서 작성·정리되었습니다. 라이선스(Apache License 2.0)의 효력에는 영향이 없지만 참고로 밝혀둡니다.
 
 ### 외부 서비스, API 요금제, 모델 이용 정책은 별도로 확인해야 합니다
 
-이 플러그인은 Codex라는 외부 플랫폼 위에서 동작하는 설정 모음일 뿐이며, Codex/OpenAI의 요금제·모델 이용 정책·서비스 약관을 대신 안내하거나 보장하지 않습니다. 아래 항목은 이 문서가 아니라 **해당 서비스의 공식 채널에서 직접 확인**하세요.
+이 플러그인은 Claude Code라는 외부 플랫폼 위에서 동작하는 설정 모음일 뿐이며, Claude Code/Anthropic의 요금제·모델 이용 정책·서비스 약관을 대신 안내하거나 보장하지 않습니다. 아래 항목은 이 문서가 아니라 **해당 서비스의 공식 채널에서 직접 확인**하세요.
 
-- Codex/OpenAI의 요금제와 사용량 제한
+- Claude Code/Anthropic의 요금제와 사용량 제한
 - 모델 사용 정책(허용/금지되는 사용 사례)
-- Codex/OpenAI의 서비스 약관 및 개인정보처리방침
-- 상업적 서비스에서 Codex 응답을 재판매·재사용할 때 별도 조건이 있는지 여부
+- Claude Code/Anthropic의 서비스 약관 및 개인정보처리방침
+- 상업적 서비스에서 Claude 응답을 재판매·재사용할 때 별도 조건이 있는지 여부
 
 ### 점검 완료: 이미지·폰트·외부 의존성 라이선스 충돌 없음
 
@@ -812,6 +813,6 @@ Apache License 2.0은 아래 4가지를 **명시적으로 허용**합니다.
 - "SoDam"·"sodam-ai" 브랜드명을 자신이 만든 것처럼 사칭해 배포하는 것
 - 라이선스 사본과 NOTICE 고지 없이 수정본을 재배포하는 것
 - 회계·세무·법률·투자 도메인 페르소나의 답변만 믿고, 실제 전문가 확인 없이 신고·계약·투자 결정을 내리는 것
-- Codex가 생성한 결과물에 포함될 수 있는 제3자 저작물을, 출처 확인 없이 그대로 상업적으로 재사용하는 것
+- Claude Code가 생성한 결과물에 포함될 수 있는 제3자 저작물을, 출처 확인 없이 그대로 상업적으로 재사용하는 것
 
 궁금한 개별 상황이 있다면 저장소의 `LICENSE`·`NOTICE` 원문을 직접 확인하시고, 확신이 서지 않는 상업적 재배포 건은 변호사와 상의하시길 권장합니다.

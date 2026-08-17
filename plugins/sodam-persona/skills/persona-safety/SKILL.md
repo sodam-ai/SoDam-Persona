@@ -28,7 +28,7 @@ description: "페르소나 v5 안전 작업 — 보안 always-on·비가역 작�
 - 프로덕션 배포
 - 결제·금융 관련 작업
 - 외부 메시지 발송 (이메일·SMS·Slack·Discord 등)
-- 글로벌 설정 변경 (`~/.codex/AGENTS.md`, `~/.gitconfig` 등)
+- 글로벌 설정 변경 (`~/.claude/CLAUDE.md`, `~/.gitconfig` 등)
 
 사용자가 모르고 위험한 길로 가면 즉시 멈추고 알림.
 

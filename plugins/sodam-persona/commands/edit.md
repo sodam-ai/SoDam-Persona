@@ -42,5 +42,5 @@ description: "인터뷰 방식으로 기존 페르소나(기본 15관점 + 도�
 ## 5단계. 마무리 안내
 
 - 무엇이 어느 파일에서 어떻게 바뀌었는지 간단히 요약해서 보고한다.
-- 설치된 캐시 반영이 필요함을 안내: `codex plugin marketplace upgrade sodam-persona` → `codex plugin remove sodam-persona` → `codex plugin add sodam-persona@sodam-persona` → 새 task 시작.
+- 설치된 캐시 반영이 필요함을 안내: `/plugin marketplace update sodam-persona` → `/plugin uninstall sodam-persona@sodam-persona` → `/plugin install sodam-persona@sodam-persona` → `/reload-plugins`.
 - git 커밋은 바뀐 파일만 정확히 지정해 add, conventional commit. 실제 push·PR은 사용자의 명시적 승인 없이는 실행하지 않는다.

@@ -266,13 +266,13 @@
 <header id="title-block-header">
 <h1 class="title">SoDam-Persona — README (English)</h1>
 </header>
-<h1 id="sodam-persona-for-codex">SoDam Persona for Codex</h1>
-<p><strong>SoDam Persona</strong> gives OpenAI's AI coding assistant
-<strong>Codex</strong> (an AI program that helps you build software
-using natural-language instructions) the personality of a "careful,
-detail-oriented Korean development partner." It is an add-on program (a
-<strong>plugin</strong> — a small extra program that adds features to an
-existing program).</p>
+<h1 id="sodam-persona">SoDam Persona</h1>
+<p><strong>SoDam Persona</strong> gives Anthropic's AI coding assistant
+<strong>Claude Code</strong> (an AI program that helps you build
+software using natural-language instructions) the personality of a
+"careful, detail-oriented Korean development partner." It is an add-on
+program (a <strong>plugin</strong> — a small extra program that adds
+features to an existing program).</p>
 <p>This document is written so that even someone who has never used a
 computer, a smartphone, a messenger app, or AI before can follow it from
 installation to actual use. Whenever an unfamiliar term appears for the
@@ -281,12 +281,12 @@ form. Example: repository (an online storage place that holds code and
 documents together).</p>
 <p>The plugin itself is not a separate AI. It layers a set of "judge
 this way, answer this way" rule documents on top of the conversational
-ability Codex already has. It consists of 2 always-on core rules
+ability Claude Code already has. It consists of 2 always-on core rules
 (<strong>hooks</strong> — small programs that run automatically at a
 specific moment) and 9 conditional expert knowledge modules
 (<strong>skills</strong>) that load only when relevant.</p>
 <blockquote>
-<p><strong>Current version</strong>: <code>1.1.1</code> ·
+<p><strong>Current version</strong>: <code>1.2.0</code> ·
 <strong>Perspectives</strong>: 15 · <strong>Trigger patterns</strong>:
 20 patterns (A-T) · <strong>Skills (9)</strong> ·
 <strong>Hooks</strong>: 2 · <strong>License</strong>: Apache License
@@ -333,10 +333,10 @@ explains how to install it.</p>
 <tbody>
 <tr>
 <td>1</td>
-<td>Codex CLI (terminal version), Codex desktop app, or an IDE (code
-editor) extension with Codex connected</td>
-<td>This plugin is an add-on that runs <em>inside</em> Codex, so Codex
-itself must already be there</td>
+<td>Claude Code CLI (terminal version), or an IDE (code editor)
+extension with Claude Code connected</td>
+<td>This plugin is an add-on that runs <em>inside</em> Claude Code, so
+Claude Code itself must already be there</td>
 <td>There is nothing to install the plugin into</td>
 </tr>
 <tr>
@@ -350,8 +350,8 @@ written in JavaScript, and Node.js is the engine that runs them</td>
 <td>3</td>
 <td>Git (only if installing from GitHub)</td>
 <td>Needed when installing via an address like
-<code>codex plugin marketplace add sodam-ai/SoDam-Persona</code>, so
-Codex can fetch the repository</td>
+<code>/plugin marketplace add sodam-ai/SoDam-Persona</code>, so Claude
+Code can fetch the repository</td>
 <td>You can use the local-checkout install method instead (no Git
 required)</td>
 </tr>
@@ -369,9 +369,9 @@ open a terminal from scratch</td>
 <p><strong>Operating system</strong>: Works on Windows, macOS, and
 Linux. The command examples in this document use Windows PowerShell; on
 macOS/Linux, type the same commands into the Terminal app.</p>
-<p><strong>Account</strong>: An OpenAI account/subscription for using
-Codex must already be set up independently of this plugin (this plugin
-does not create accounts or handle login for you).</p>
+<p><strong>Account</strong>: An Anthropic account/subscription for using
+Claude Code must already be set up independently of this plugin (this
+plugin does not create accounts or handle login for you).</p>
 <hr />
 <h2 id="required-software">Required Software</h2>
 <p>Installing in the order below avoids most snags. If something is
@@ -387,11 +387,11 @@ already installed, just check its version and move on.</p>
 </thead>
 <tbody>
 <tr>
-<td>Codex CLI / desktop app</td>
+<td>Claude Code</td>
 <td>Latest</td>
-<td>Search "Codex" on OpenAI's official website and follow the
-instructions</td>
-<td>(follow Codex's own guidance)</td>
+<td>Anthropic's official website, or
+<code>npm install -g @anthropic-ai/claude-code</code></td>
+<td><code>claude --version</code></td>
 </tr>
 <tr>
 <td>Node.js</td>
@@ -414,8 +414,8 @@ instructions</td>
 </tbody>
 </table>
 <ul>
-<li><strong>Codex CLI/desktop app</strong> is the "stage" this plugin
-runs on. Install and log in first.</li>
+<li><strong>Claude Code</strong> is the "stage" this plugin runs on.
+Install and log in first.</li>
 <li><strong>Node.js</strong> is required for every user (it runs the
 hooks). After installing, reopen your terminal so the <code>node</code>
 command is recognized.</li>
@@ -439,10 +439,10 @@ variables</h3>
 <p>This plugin has <strong>zero</strong> environment variables (API
 keys, <code>.env</code> files, etc.) that a user needs to configure
 (confirmed by code review — neither hook script reads
-<code>process.env</code> anywhere). The <code>${PLUGIN_ROOT}</code>
-placeholder in the hook command is substituted automatically by Codex at
-run time with the plugin's install path; there is nothing for you to set
-yourself.</p>
+<code>process.env</code> anywhere). The
+<code>${CLAUDE_PLUGIN_ROOT}</code> placeholder in the hook command is
+substituted automatically by Claude Code at run time with the plugin's
+install path; there is nothing for you to set yourself.</p>
 <hr />
 <h2 id="how-to-download">How to Download</h2>
 <p>There are two installation paths, and whether you need a separate
@@ -450,8 +450,8 @@ yourself.</p>
 <h3
 id="method-a--install-straight-from-github-no-download-step-recommended">Method
 A — Install straight from GitHub (no download step, recommended)</h3>
-<p>Codex fetches the repository itself at install time, so you never
-need to manually download files first. Skip ahead to "Install from
+<p>Claude Code fetches the repository itself at install time, so you
+never need to manually download files first. Skip ahead to "Install from
 GitHub" in <a href="#installation">Installation</a>.</p>
 <h3
 id="method-b--download-the-repository-to-your-computer-first-then-install-locally">Method
@@ -478,11 +478,10 @@ folder.</p>
 <h2 id="installation">Installation</h2>
 <h3 id="install-from-github-recommended">Install from GitHub
 (recommended)</h3>
-<p>Open a terminal and type these two lines in order (press Enter after
-each).</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>codex plugin marketplace add sodam-ai<span class="op">/</span>SoDam-Persona</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>codex plugin add sodam-persona@sodam-persona</span></code></pre></div>
+<p>Launch Claude Code, then type these two lines into the conversation
+in order (press Enter after each).</p>
+<pre class="text"><code>/plugin marketplace add sodam-ai/SoDam-Persona
+/plugin install sodam-persona@sodam-persona</code></pre>
 <ul>
 <li>Line 1 means: "Register this GitHub repository as a candidate source
 of plugins (a <strong>marketplace</strong>)."</li>
@@ -490,36 +489,36 @@ of plugins (a <strong>marketplace</strong>)."</li>
 <code>sodam-persona</code> plugin." In
 <code>sodam-persona@sodam-persona</code>, the part before <code>@</code>
 is the plugin name and the part after is the marketplace it belongs to
-(here both happen to be <code>sodam-persona</code>).</li>
+(here both happen to be <code>sodam-persona</code>). If prompted to
+choose an installation scope (User/Project/Local), pick
+<strong>User</strong> for personal use.</li>
 </ul>
+<p>If the install summary says <code>Plugin is now active.</code> it's
+already applied; if it says
+<code>Run /reload-plugins to activate.</code>, run the command below
+once more.</p>
+<pre class="text"><code>/reload-plugins</code></pre>
 <h3 id="install-from-a-local-checkout">Install from a local
 checkout</h3>
 <p>If you already downloaded the repository using Method B in <a
-href="#how-to-download">How to Download</a>, open a terminal inside that
-folder (the repository root) and run:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>codex plugin marketplace add <span class="op">.</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>codex plugin add sodam-persona@sodam-persona</span></code></pre></div>
+href="#how-to-download">How to Download</a>, launch Claude Code inside
+that folder (the repository root) and type:</p>
+<pre class="text"><code>/plugin marketplace add .
+/plugin install sodam-persona@sodam-persona</code></pre>
 <p><code>.</code> (a single period) means "the folder I'm currently
 in."</p>
-<h3 id="trust-approval-after-installation-required">Trust approval after
-installation (required)</h3>
-<p>Installing alone is not the final step.</p>
-<ol type="1">
-<li>Start a new Codex task (work session).</li>
-<li>The moment this plugin's hook (auto-run rule) is about to activate
-for the first time, Codex will show a confirmation prompt such as "Do
-you trust this hook?"</li>
-<li>Review what the hook does and select <strong>Allow</strong> — only
-then does the always-on core actually run.</li>
-</ol>
-<p>This approval step is a safety feature of Codex itself, and the
-plugin cannot bypass or skip it (<a href="#security--data-flow">Security
-&amp; Data Flow</a> has more).</p>
+<h3 id="trust-confirmation-after-installation">Trust confirmation after
+installation</h3>
+<p>Claude Code treats plugins and marketplaces as highly trusted
+components that can execute code with your user privileges.
+<code>/plugin marketplace add</code> and <code>/plugin install</code>
+prompt you to confirm you trust the source (here, the
+<code>sodam-ai/SoDam-Persona</code> GitHub repository) — only install
+from sources you trust (<a href="#security--data-flow">Security &amp;
+Data Flow</a> has more).</p>
 <h3 id="verify-the-installation">Verify the installation</h3>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>codex plugin marketplace list</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>codex plugin list</span></code></pre></div>
+<pre class="text"><code>/plugin marketplace list
+/plugin list</code></pre>
 <p>The first command shows registered marketplaces; the second shows
 plugins that are actually installed. If <code>sodam-persona</code>
 appears in both, installation succeeded.</p>
@@ -528,14 +527,13 @@ appears in both, installation succeeded.</p>
 <p>For anyone who already has the prerequisites ready and wants to skip
 the detailed explanations, here is the 5-step version.</p>
 <ol type="1">
-<li>Open a terminal.</li>
-<li>Type
-<code>codex plugin marketplace add sodam-ai/SoDam-Persona</code> and
+<li>Open a terminal and type <code>claude</code> to start Claude
+Code.</li>
+<li>Type <code>/plugin marketplace add sodam-ai/SoDam-Persona</code> and
 press Enter.</li>
-<li>Type <code>codex plugin add sodam-persona@sodam-persona</code> and
-press Enter.</li>
-<li>Start a new Codex task, and when the trust-approval prompt appears,
-click <strong>Allow</strong>.</li>
+<li>Type <code>/plugin install sodam-persona@sodam-persona</code> and
+press Enter. (If it says <code>Run /reload-plugins to activate.</code>,
+also type <code>/reload-plugins</code>.)</li>
 <li>Talk to it normally, in your own language. Example: "Find bugs in
 this code" — no special commands to memorize; the persona automatically
 judges natural-language requests and reacts.</li>
@@ -545,33 +543,23 @@ href="#troubleshooting">Troubleshooting</a>.</p>
 <hr />
 <h2 id="how-to-run">How to Run</h2>
 <p>There is no separate concept of "running the plugin." This plugin
-<strong>automatically activates the moment you run Codex and start a
-conversation.</strong> In other words, "how to run" is really "how to
-open Codex."</p>
-<h3 id="run-via-codex-cli-in-a-terminal">Run via Codex CLI in a
-terminal</h3>
+<strong>automatically activates the moment you run Claude Code and start
+a conversation.</strong> In other words, "how to run" is really "how to
+open Claude Code."</p>
+<h3 id="run-via-the-claude-code-cli-in-a-terminal">Run via the Claude
+Code CLI in a terminal</h3>
 <ol type="1">
 <li>Open a terminal (PowerShell or Command Prompt on Windows; Terminal
 app on macOS).</li>
-<li>Type <code>codex</code> and press Enter (the exact launch command
-follows whichever official instructions came with your installed Codex
-CLI).</li>
-<li>Once a new task (work session) opens, this plugin's SessionStart
-hook runs automatically at that moment and injects the persona
-core.</li>
-</ol>
-<h3 id="run-via-the-codex-desktop-app">Run via the Codex desktop
-app</h3>
-<ol type="1">
-<li>Launch the installed Codex app icon.</li>
-<li>Start a new conversation (task).</li>
-<li>The hook runs automatically at session start, exactly as above.</li>
+<li>Type <code>claude</code> and press Enter.</li>
+<li>Once a new session opens, this plugin's SessionStart hook runs
+automatically at that moment and injects the persona core.</li>
 </ol>
 <h3 id="run-via-an-ide-code-editor-extension">Run via an IDE (code
 editor) extension</h3>
-<p>If you use an IDE extension with Codex connected, open the Codex
-panel inside the IDE and start a new session — the same behavior
-applies.</p>
+<p>If you use an IDE extension with Claude Code connected, open the
+Claude Code panel inside the IDE and start a new session — the same
+behavior applies.</p>
 <h3 id="a-very-basic-guide-for-first-time-terminal-users-windows">A very
 basic guide for first-time terminal users (Windows)</h3>
 <ol type="1">
@@ -587,27 +575,28 @@ error, check <a href="#troubleshooting">Troubleshooting</a>.</li>
 <h2 id="how-to-use">How to Use</h2>
 <h3 id="using-it-without-memorizing-anything-default">Using it without
 memorizing anything (default)</h3>
-<p>Just talk to Codex naturally, the way you normally would. The persona
-core is always on and applies automatically, and whenever your request
-matches a specific skill's description, that skill is loaded
+<p>Just talk to Claude Code naturally, the way you normally would. The
+persona core is always on and applies automatically, and whenever your
+request matches a specific skill's description, that skill is loaded
 automatically with no extra step.</p>
 <pre class="text"><code>Find bugs in this code
 Review this logic objectively
 What should I check before safely deploying this feature?</code></pre>
 <h3 id="explicitly-calling-a-specific-expert-perspective">Explicitly
 calling a specific expert perspective</h3>
-<p>Prefix a skill name with <code>$</code> to invoke it explicitly.</p>
-<pre class="text"><code>$persona-investor Review the loss scenarios in this automated trading logic
-$persona-lawyer Find risky clauses in these terms of service
-$persona-accountant Review whether this cost can be treated as a deductible business expense
-$persona-marketer Improve this landing-page copy
-$persona-create Add a new medical-domain persona
-$persona-edit Add &quot;rebalancing&quot; to the investor triggers</code></pre>
+<p>Use the <code>/sodam-persona:&lt;skill name&gt;</code> form to invoke
+it explicitly.</p>
+<pre class="text"><code>/sodam-persona:persona-investor Review the loss scenarios in this automated trading logic
+/sodam-persona:persona-lawyer Find risky clauses in these terms of service
+/sodam-persona:persona-accountant Review whether this cost can be treated as a deductible business expense
+/sodam-persona:persona-marketer Improve this landing-page copy
+/sodam-persona:persona-create Add a new medical-domain persona
+/sodam-persona:persona-edit Add &quot;rebalancing&quot; to the investor triggers</code></pre>
 <h3 id="checking-which-skills-are-available">Checking which skills are
 available</h3>
-<p>In Codex CLI and the IDE extension, type <code>/skills</code>, or
-just type <code>$</code>, to see the list of skills currently
-available.</p>
+<p>Type just <code>/</code> into the conversation to see the list of
+commands and skills currently available. This plugin's entries start
+with <code>sodam-persona:</code>.</p>
 <h3 id="controlling-the-response-depth-yourself">Controlling the
 response depth yourself</h3>
 <p>Mixing certain words into your request automatically changes how deep
@@ -641,8 +630,9 @@ href="#how-it-works">How It Works</a>.</p>
 </table>
 <hr />
 <h2 id="commands">Commands</h2>
-<h3 id="codex-plugin-management-commands-type-into-a-terminal">Codex
-plugin-management commands (type into a terminal)</h3>
+<h3
+id="claude-code-plugin-management-commands-type-into-the-conversation">Claude
+Code plugin-management commands (type into the conversation)</h3>
 <table>
 <thead>
 <tr>
@@ -652,37 +642,45 @@ plugin-management commands (type into a terminal)</h3>
 </thead>
 <tbody>
 <tr>
-<td><code>codex plugin marketplace add &lt;source&gt;</code></td>
+<td><code>/plugin marketplace add &lt;source&gt;</code></td>
 <td>Register a marketplace (a list of plugin candidates).
 <code>&lt;source&gt;</code> is either a GitHub repo like
 <code>sodam-ai/SoDam-Persona</code> or a local folder path like
 <code>.</code></td>
 </tr>
 <tr>
-<td><code>codex plugin marketplace list</code></td>
+<td><code>/plugin marketplace list</code></td>
 <td>List registered marketplaces</td>
 </tr>
 <tr>
-<td><code>codex plugin marketplace upgrade sodam-persona</code></td>
+<td><code>/plugin marketplace update sodam-persona</code></td>
 <td>Refresh the registered marketplace source to its latest state</td>
 </tr>
 <tr>
-<td><code>codex plugin add sodam-persona@sodam-persona</code></td>
+<td><code>/plugin install sodam-persona@sodam-persona</code></td>
 <td>Actually install the plugin</td>
 </tr>
 <tr>
-<td><code>codex plugin list</code></td>
+<td><code>/plugin list</code></td>
 <td>List currently installed plugins</td>
 </tr>
 <tr>
-<td><code>codex plugin remove sodam-persona@sodam-persona</code></td>
+<td><code>/plugin uninstall sodam-persona@sodam-persona</code></td>
 <td>Remove the plugin</td>
+</tr>
+<tr>
+<td><code>/reload-plugins</code></td>
+<td>Apply an install/removal immediately, without restarting</td>
 </tr>
 </tbody>
 </table>
+<p>There are also terminal-level commands for scripting outside a
+session: <code>claude plugin install sodam-persona@sodam-persona</code>,
+<code>claude plugin marketplace update sodam-persona</code>, etc.
+(append the same sub-command after <code>claude plugin</code>).</p>
 <h3
-id="persona-skill-invocations-type-into-the-codex-conversation">Persona
-skill invocations (type into the Codex conversation)</h3>
+id="persona-skill-invocations-type-into-the-claude-code-conversation">Persona
+skill invocations (type into the Claude Code conversation)</h3>
 <table>
 <thead>
 <tr>
@@ -692,34 +690,34 @@ skill invocations (type into the Codex conversation)</h3>
 </thead>
 <tbody>
 <tr>
-<td><code>/skills</code> or <code>$</code></td>
-<td>Show the list of skills currently available</td>
+<td><code>/</code> (slash alone)</td>
+<td>Show the list of commands and skills currently available</td>
 </tr>
 <tr>
-<td><code>$persona-investor &lt;text&gt;</code></td>
+<td><code>/sodam-persona:persona-investor &lt;text&gt;</code></td>
 <td>Explicitly invoke the professional investor perspective (#13)</td>
 </tr>
 <tr>
-<td><code>$persona-lawyer &lt;text&gt;</code></td>
+<td><code>/sodam-persona:persona-lawyer &lt;text&gt;</code></td>
 <td>Explicitly invoke the professional lawyer perspective (#11)</td>
 </tr>
 <tr>
-<td><code>$persona-accountant &lt;text&gt;</code></td>
+<td><code>/sodam-persona:persona-accountant &lt;text&gt;</code></td>
 <td>Explicitly invoke the accounting/tax specialist perspective
 (#14)</td>
 </tr>
 <tr>
-<td><code>$persona-marketer &lt;text&gt;</code></td>
+<td><code>/sodam-persona:persona-marketer &lt;text&gt;</code></td>
 <td>Explicitly invoke the marketing/sales specialist perspective
 (#15)</td>
 </tr>
 <tr>
-<td><code>$persona-create</code></td>
+<td><code>/sodam-persona:persona-create</code></td>
 <td>Interview-style creation of a new domain persona (the 16th and
 beyond)</td>
 </tr>
 <tr>
-<td><code>$persona-edit</code></td>
+<td><code>/sodam-persona:persona-edit</code></td>
 <td>Interview-style add/edit/remove of trigger words for an existing
 persona</td>
 </tr>
@@ -976,12 +974,12 @@ href="#security--data-flow">Security &amp; Data Flow</a>.</p>
 <h2 id="workflow">Workflow</h2>
 <h3 id="the-flow-of-an-ordinary-conversation-every-session">The flow of
 an ordinary conversation (every session)</h3>
-<pre class="text"><code>1. A Codex session (task) starts
+<pre class="text"><code>1. A Claude Code session starts
        │
        ▼
 2. The SessionStart hook runs (inject-core.js)
    → injects the full text of persona_core.md into the session context
-     (once per session, requires trust approval)
+     (once per session)
        │
        ▼
 3. The user types a message
@@ -993,7 +991,7 @@ an ordinary conversation (every session)</h3>
      conversation is compacted or a sub-agent has run
        │
        ▼
-5. Codex interprets the injected rules together with what the user said
+5. Claude Code interprets the injected rules together with what the user said
    → decides the response intensity (L0-L3) and matches trigger words
        │
        ▼
@@ -1009,9 +1007,11 @@ an ordinary conversation (every session)</h3>
        ▼
 8. The response is checked against a self-verification checklist before
    being sent</code></pre>
-<h3 id="the-flow-for-adding-a-new-domain-persona-persona-create">The
-flow for adding a new domain persona (<code>$persona-create</code>)</h3>
-<pre class="text"><code>1. Call $persona-create
+<h3
+id="the-flow-for-adding-a-new-domain-persona-sodam-personapersona-create">The
+flow for adding a new domain persona
+(<code>/sodam-persona:persona-create</code>)</h3>
+<pre class="text"><code>1. Call /sodam-persona:persona-create
        │
        ▼
 2. An interview proceeds (one question at a time)
@@ -1031,25 +1031,26 @@ flow for adding a new domain persona (<code>$persona-create</code>)</h3>
 5. Run node validate.mjs → repeat fixes until it prints ✅ PASS
        │
        ▼
-6. Guidance on refreshing the install cache (marketplace upgrade →
-   remove → add → new task)
+6. Guidance on refreshing the install cache (marketplace update →
+   uninstall → install → /reload-plugins)
        │
        ▼
 7. Only the changed files are precisely staged with git add, then a
    conventional commit is made
    (actual push/PR/merge is never done without explicit user approval)</code></pre>
-<p><code>$persona-edit</code> differs in scope (a single table row for a
-base perspective, versus up to 4-5 locations for a domain persona), but
-the verify (step 4) → guidance (step 5) flow afterward is the same.</p>
+<p><code>/sodam-persona:persona-edit</code> differs in scope (a single
+table row for a base perspective, versus up to 4-5 locations for a
+domain persona), but the verify (step 4) → guidance (step 5) flow
+afterward is the same.</p>
 <hr />
 <h2 id="architecture">Architecture</h2>
 <h3 id="understanding-the-plugin-concept">Understanding the plugin
 concept</h3>
-<p>A Codex "plugin" is a bundle made of these 4 pieces.</p>
+<p>A Claude Code "plugin" is a bundle made of these 4 pieces.</p>
 <ul>
 <li><strong>Marketplace</strong>: a listing file (named
-marketplace.json) that tells Codex where a plugin comes from — either a
-GitHub repository or a folder path on your computer.</li>
+marketplace.json) that tells Claude Code where a plugin comes from —
+either a GitHub repository or a folder path on your computer.</li>
 <li><strong>Manifest</strong>: a file (named plugin.json) holding the
 plugin's name, version, and description.</li>
 <li><strong>Hook</strong>: a small program that runs automatically at a
@@ -1057,20 +1058,9 @@ specific moment (such as session start).</li>
 <li><strong>Skill</strong>: a knowledge document that loads only in
 specific situations.</li>
 </ul>
-<h3 id="why-this-repository-still-has-claude-code-files-too">Why this
-repository still has Claude Code files too</h3>
-<p>This project originally started as a plugin for Claude Code (a
-different AI coding tool) before being ported to Codex. As a remnant of
-that, <code>plugins/sodam-persona/.claude-plugin/plugin.json</code> and
-the root <code>.claude-plugin/marketplace.json</code> still exist, but
-<strong>both exist only for compatibility with the earlier host and are
-not used at all during Codex installation.</strong> The files Codex
-actually reads are <code>.agents/plugins/marketplace.json</code> and
-<code>plugins/sodam-persona/.codex-plugin/plugin.json</code>.</p>
 <h3 id="full-repository-layout">Full repository layout</h3>
 <pre class="text"><code>.
-├── .agents/plugins/marketplace.json      # The marketplace definition Codex actually reads (source of truth)
-├── .claude-plugin/marketplace.json       # [Legacy host compatibility] Claude Code marketplace definition
+├── .claude-plugin/marketplace.json       # The marketplace definition Claude Code actually reads (source of truth)
 ├── .github/workflows/validate.yml        # CI: runs validate.mjs automatically on every push/PR
 ├── LICENSE                               # Full text of the Apache License 2.0
 ├── NOTICE                                # Copyright, trademark, and third-party attribution notices
@@ -1081,8 +1071,7 @@ actually reads are <code>.agents/plugins/marketplace.json</code> and
 ├── doc-theme.html                        # The HTML theme (CSS) used by that script
 ├── validate.mjs                          # The automated consistency checker
 └── plugins/sodam-persona/                # The actual plugin body that gets distributed and installed
-    ├── .claude-plugin/plugin.json        # [Legacy host compatibility] Claude Code manifest
-    ├── .codex-plugin/plugin.json         # Codex manifest (source of truth)
+    ├── .claude-plugin/plugin.json        # Plugin manifest (source of truth)
     ├── hooks/
     │   ├── hooks.json                    # Registers the SessionStart / UserPromptSubmit hooks
     │   ├── inject-core.js                # Script that runs on SessionStart
@@ -1105,11 +1094,9 @@ actually reads are <code>.agents/plugins/marketplace.json</code> and
     └── reference/
         ├── persona_full_core.md          # The full persona definition (for full L3 activation / session recovery)
         └── test_scenarios.md             # A set of sample utterances for verifying trigger behavior</code></pre>
-<p>The <code>commands/</code> folder preserves the original Claude Code
-workflow text as an internal reference. Codex does not run these as
-slash commands directly; instead, the
+<p>The <code>commands/</code> folder holds the procedure text that the
 <code>persona-create</code>/<code>persona-edit</code> skills read and
-follow their content.</p>
+follow.</p>
 <h3
 id="the-10-checks-performed-by-the-automated-consistency-checker-validatemjs">The
 10 checks performed by the automated consistency checker
@@ -1158,7 +1145,7 @@ wired into both the core file and the marker file</td>
 </tr>
 <tr>
 <td>6</td>
-<td><code>.codex-plugin/plugin.json</code>/<code>.agents/plugins/marketplace.json</code>
+<td><code>.claude-plugin/plugin.json</code>/<code>.claude-plugin/marketplace.json</code>
 are valid JSON, with the correct name and source path</td>
 </tr>
 <tr>
@@ -1213,7 +1200,7 @@ from reaching <code>main</code>.</p>
 <td>Build and run code on the fly (<code>eval</code>)</td>
 </tr>
 <tr>
-<td>Fully drain the hook metadata Codex sends over stdin before
+<td>Fully drain the hook metadata the host sends over stdin before
 responding (purely to avoid an EPIPE error on very large prompts — the
 content is never stored or used)</td>
 <td>Launch any external program</td>
@@ -1229,31 +1216,31 @@ content is never stored or used)</td>
 </tbody>
 </table>
 <h3 id="the-trust-approval-procedure">The trust-approval procedure</h3>
-<p>Installing the plugin does not mean its hooks run immediately. Codex
-shows the user the exact content of a hook the first time it's about to
-activate, and only runs it after approval. This procedure belongs to the
-Codex platform itself, and the plugin cannot skip it.</p>
+<p>Claude Code treats plugins and marketplaces as highly trusted
+components that can run code with your user privileges, and asks you to
+confirm you trust the source at install time. This procedure belongs to
+the Claude Code platform itself, and the plugin cannot skip it.</p>
 <h3
 id="the-irreversible-action-gate-is-a-behavioral-guideline-not-a-system-firewall">The
 irreversible-action gate is a "behavioral guideline," not a "system
 firewall"</h3>
 <p>In front of irreversible actions — deletion, deployment,
-force-pushing, external messaging — this persona instructs Codex to
-adopt the <strong>response habit and judgment standard</strong> of
+force-pushing, external messaging — this persona instructs Claude Code
+to adopt the <strong>response habit and judgment standard</strong> of
 "don't run it automatically; ask the user first." This is not a
 mechanism that physically blocks filesystem access; it is a rule layered
-on top of the approval/permission system Codex already has, saying
-"always stop and ask in these situations." The actual final execution
-authority and approval process always follow Codex's own platform
-policy.</p>
+on top of the approval/permission system Claude Code already has
+(tool-use permission prompts, etc.), saying "always stop and ask in
+these situations." The actual final execution authority and approval
+process always follow Claude Code's own platform policy.</p>
 <h3 id="where-data-actually-flows">Where data actually flows</h3>
 <pre class="text"><code>The sentence the user typed
         +
 The persona rule text the plugin injected (read from a local file)
         │
         ▼
-The conversation context is sent to whichever AI model provider Codex uses
-   (this happens regardless of this plugin — it is simply how Codex
+The conversation context is sent to the AI model (Claude) that Claude Code uses
+   (this happens regardless of this plugin — it is simply how Claude Code
     normally operates)
         │
         ▼
@@ -1261,10 +1248,9 @@ A response is generated and returned to the user</code></pre>
 <p>The plugin itself sends nothing to any server or remote storage of
 its own. It does not collect personal data, keep remote usage logs, or
 perform any separate analytics (telemetry). That said, as long as you
-use Codex at all, your conversation content being sent to whatever AI
-model provider Codex connects to (e.g. OpenAI) happens regardless of
-this plugin, and that provider's own official privacy policy governs how
-it's handled.</p>
+use Claude Code at all, your conversation content being sent to its AI
+model provider (Anthropic) happens regardless of this plugin, and
+Anthropic's own official privacy policy governs how it's handled.</p>
 <h3 id="habits-around-personal-and-sensitive-data">Habits around
 personal and sensitive data</h3>
 <ul>
@@ -1347,8 +1333,8 @@ that passes this check.</p>
 <code>doc-theme.html</code></td>
 </tr>
 <tr>
-<td>The Codex marketplace definition (source of truth)</td>
-<td><code>.agents/plugins/marketplace.json</code></td>
+<td>The Claude Code marketplace definition (source of truth)</td>
+<td><code>.claude-plugin/marketplace.json</code></td>
 </tr>
 <tr>
 <td>The CI (automated check) configuration</td>
@@ -1367,7 +1353,31 @@ downloads this plugin, so this document does not cover it.</p>
 <p>Listed with the most recent entries at the top. Click (or tap) an
 item to expand its details.</p>
 <details>
-<summary><strong>2026-08-09 — Official Codex marketplace packaging</strong></summary>
+<summary><strong>2026-08-17 — Reverted to Claude Code only</strong></summary>
+
+<ul>
+<li>Decided to maintain Codex support independently in a separate
+repository — this repository is confirmed as a Claude Code-only plugin
+again.</li>
+<li>Removed Codex-specific files:
+<code>.codex-plugin/plugin.json</code>,
+<code>.agents/plugins/marketplace.json</code>, and related
+references.</li>
+<li><strong>Critical bug fix</strong>: during the Codex port,
+<code>hooks.json</code>'s Claude Code variable
+<code>${CLAUDE_PLUGIN_ROOT}</code> had been mistakenly changed to
+Codex's <code>${PLUGIN_ROOT}</code> convention — in that state, the
+hooks never actually ran under Claude Code. Restored the original
+variable name.</li>
+<li>Fully updated README command references to Claude Code's real
+command set (<code>/plugin marketplace add</code>,
+<code>/plugin install</code>, <code>/reload-plugins</code>, etc.,
+verified against official documentation).</li>
+</ul>
+</details>
+
+<details>
+<summary><strong>2026-08-09 — Official Codex marketplace packaging (removed by the 2026-08-17 reversion)</strong></summary>
 
 <ul>
 <li>Added <code>.agents/plugins/marketplace.json</code> — formally split
@@ -1492,25 +1502,27 @@ speculation as fact.</li>
 </thead>
 <tbody>
 <tr>
-<td><code>codex plugin marketplace add .</code> fails</td>
+<td><code>/plugin marketplace add .</code> fails</td>
 <td>You ran it from somewhere other than the repository root, or
-<code>.agents/plugins/marketplace.json</code> is missing</td>
+<code>.claude-plugin/marketplace.json</code> is missing</td>
 <td>Move into the folder you downloaded the repository into (where
 <code>README.md</code> is visible) and try again</td>
 </tr>
 <tr>
-<td>"Marketplace not found" while updating</td>
-<td><code>remove</code> was run before <code>upgrade</code>, which
+<td>"Marketplace not found" while reinstalling</td>
+<td><code>uninstall</code> was run before <code>update</code>, which
 erased the marketplace registration itself</td>
-<td>Always follow the order <strong><code>upgrade</code> →
-<code>remove</code> → <code>add</code></strong>. Reversing the order
-reproduces this error</td>
+<td>Always follow the order <strong><code>update</code> →
+<code>uninstall</code> → <code>install</code></strong>. Reversing the
+order reproduces this error</td>
 </tr>
 <tr>
 <td>Installed, but the persona doesn't seem active at all</td>
-<td>You missed or declined the initial hook trust-approval prompt</td>
-<td>Start a new task and confirm the trust prompt appears again; select
-<strong>Allow</strong></td>
+<td>You missed the trust confirmation, or didn't run
+<code>/reload-plugins</code> after installing</td>
+<td>Check with <code>/plugin list</code> → run
+<code>/reload-plugins</code> → if still not working, start a fresh
+session</td>
 </tr>
 <tr>
 <td>You edited the plugin's code, but the change isn't reflected in
@@ -1518,10 +1530,10 @@ conversations</td>
 <td>The install cache does not refresh automatically just because a file
 changed</td>
 <td>Reinstall in this order:
-<code>codex plugin marketplace upgrade sodam-persona</code> →
-<code>codex plugin remove sodam-persona@sodam-persona</code> →
-<code>codex plugin add sodam-persona@sodam-persona</code>, then start a
-new task</td>
+<code>/plugin marketplace update sodam-persona</code> →
+<code>/plugin uninstall sodam-persona@sodam-persona</code> →
+<code>/plugin install sodam-persona@sodam-persona</code> →
+<code>/reload-plugins</code></td>
 </tr>
 <tr>
 <td>Typing <code>node</code> in the terminal gives a "command not
@@ -1539,8 +1551,8 @@ just <em>using</em> the plugin, this error is safe to ignore. To fix it,
 install from <code>pandoc.org/installing.html</code></td>
 </tr>
 <tr>
-<td><code>codex plugin marketplace add sodam-ai/SoDam-Persona</code>
-fails with a network error</td>
+<td><code>/plugin marketplace add sodam-ai/SoDam-Persona</code> fails
+with a network error</td>
 <td>Git isn't installed, the repository name is mistyped, or a
 firewall/proxy is blocking it</td>
 <td>Check Git with <code>git --version</code>, double-check the
@@ -1575,8 +1587,13 @@ typing them manually</td>
 <td>The persona feels like it's drifted after a long session</td>
 <td>This is expected — the marker is re-injected on every message by
 design, to auto-recover the persona</td>
-<td>No action needed. If it still feels off, start a new task for a
-fresh session</td>
+<td>No action needed. If it still feels off, start a new session</td>
+</tr>
+<tr>
+<td>A plugin skill name doesn't show up</td>
+<td>The install cache may be stale after this restructuring</td>
+<td><code>rm -rf ~/.claude/plugins/cache</code>, restart Claude Code,
+then reinstall using the steps above</td>
 </tr>
 </tbody>
 </table>
@@ -1594,9 +1611,9 @@ plugin folder, the hooks never write or delete any file. Irreversible
 actions such as deletion or deployment are always designed to ask the
 user for confirmation first. See <a href="#security--data-flow">Security
 &amp; Data Flow</a> for details.</p>
-<p><strong>Q. Do I need an internet connection?</strong> A. Codex itself
-needs the internet to talk to an AI model. The plugin's hooks themselves
-only read local files and don't make any separate network
+<p><strong>Q. Do I need an internet connection?</strong> A. Claude Code
+itself needs the internet to talk to an AI model. The plugin's hooks
+themselves only read local files and don't make any separate network
 connection.</p>
 <p><strong>Q. Can I use the accounting/tax or legal answers instead of
 consulting a real professional?</strong> A. No. This persona is not an
@@ -1605,21 +1622,20 @@ reference information only, and any actionable decision (filing,
 contract interpretation, etc.) must be confirmed by a real professional
 first. This is why a disclaimer is always shown alongside such
 answers.</p>
-<p><strong>Q. Does it work with Claude Code too?</strong> A. Legacy
-compatibility files (<code>.claude-plugin/</code>) still remain in the
-repository, but this project is currently <strong>maintained for Codex
-only</strong>, and new features and trigger updates are made against the
-Codex manifest. Up-to-date behavior on Claude Code is not
-guaranteed.</p>
+<p><strong>Q. Does it work with Codex too?</strong> A. No. Codex support
+is maintained independently in a separate repository, and this
+repository is maintained for Claude Code only. If you use Codex, please
+check that separate repository instead.</p>
 <p><strong>Q. Can I install it on multiple computers?</strong> A. Yes.
 The plugin is designed to be self-contained, so it behaves identically
 on a brand-new computer with nothing more than a fresh install — no
 separate personal config files or memory needed.</p>
 <p><strong>Q. I want to add or change trigger words myself.</strong> A.
-Call <code>$persona-edit</code> (to edit an existing perspective) or
-<code>$persona-create</code> (to add a completely new field of
-expertise) and follow the interview. See <a href="#how-to-use">How to
-Use</a> and <a href="#workflow">Workflow</a>.</p>
+Call <code>/sodam-persona:persona-edit</code> (to edit an existing
+perspective) or <code>/sodam-persona:persona-create</code> (to add a
+completely new field of expertise) and follow the interview. See <a
+href="#how-to-use">How to Use</a> and <a
+href="#workflow">Workflow</a>.</p>
 <p><strong>Q. The persona answers too long / too heavily.</strong> A.
 Mixing in words like "briefly", "in short", or "just the key point"
 switches it to a short format immediately. This rule has the highest
@@ -1639,9 +1655,9 @@ copy, marking changed files, and keeping notices intact. See <a
 href="#legal-copyright-license-and-commercial-use">Legal, Copyright,
 License, and Commercial Use</a> for the conditions. This is a
 plain-language summary, not legal advice.</p>
-<p><strong>Q. Is this an official feature made by OpenAI?</strong> A.
-No. This project has no affiliation with or sponsorship from OpenAI.
-It's an independent community plugin. "Codex" and "OpenAI" are
+<p><strong>Q. Is this an official feature made by Anthropic?</strong> A.
+No. This project has no affiliation with or sponsorship from Anthropic.
+It's an independent community plugin. "Claude" and "Claude Code" are
 trademarks of their respective owners, used in this document purely to
 refer to those products (nominative use).</p>
 <p><strong>Q. If a long session gets compacted, or goes through a
@@ -1773,7 +1789,7 @@ important legal notice about the domain-expert personas</h3>
 <p>The professional investor (#13), professional lawyer (#11),
 accounting/tax specialist (#14), and marketing/sales specialist (#15)
 personas in this plugin are <strong>not actual licensed professionals —
-they are software settings that adjust Codex's AI response
+they are software settings that adjust Claude Code's AI response
 style.</strong></p>
 <ul>
 <li>Investment/trading-related answers are not investment advice; full
@@ -1794,17 +1810,17 @@ before publishing anything.</li>
 id="things-to-check-before-using-ai-generated-content-code-docs-etc">Things
 to check before using AI-generated content (code, docs, etc.)</h3>
 <ul>
-<li>This plugin only adjusts Codex's response style — it does not
+<li>This plugin only adjusts Claude Code's response style — it does not
 guarantee or judge the copyright status of the code, documents, or
-explanations Codex actually generates.</li>
+explanations Claude Code actually generates.</li>
 <li>Before including an AI-generated result in a commercial product,
 service, or client deliverable, <strong>you must check yourself</strong>
 whether:
 <ul>
 <li>the result is not substantially similar to an existing copyrighted
 work (risk of infringement),</li>
-<li>the terms of service of the AI service you used (Codex/OpenAI, etc.)
-permit commercial use of that result, and</li>
+<li>the terms of service of the AI service you used (Claude
+Code/Anthropic, etc.) permit commercial use of that result, and</li>
 <li>the result doesn't conflict with the license terms of any
 open-source code it may have drawn on.</li>
 </ul></li>
@@ -1818,15 +1834,15 @@ id="external-services-api-pricing-and-model-usage-policies-must-be-checked-separ
 services, API pricing, and model-usage policies must be checked
 separately</h3>
 <p>This plugin is only a set of configurations that runs on top of the
-external platform Codex — it does not describe or guarantee
-Codex/OpenAI's pricing, model-usage policy, or terms of service. Check
+external platform Claude Code — it does not describe or guarantee Claude
+Code/Anthropic's pricing, model-usage policy, or terms of service. Check
 the items below directly through <strong>that service's own official
 channels</strong>, not this document.</p>
 <ul>
-<li>Codex/OpenAI's pricing plans and usage limits</li>
+<li>Claude Code/Anthropic's pricing plans and usage limits</li>
 <li>The model-usage policy (permitted/prohibited use cases)</li>
-<li>Codex/OpenAI's terms of service and privacy policy</li>
-<li>Whether reselling or reusing Codex's responses in a commercial
+<li>Claude Code/Anthropic's terms of service and privacy policy</li>
+<li>Whether reselling or reusing Claude's responses in a commercial
 service has any separate conditions attached</li>
 </ul>
 <h3
@@ -1951,7 +1967,7 @@ the NOTICE notices</li>
 accounting/tax, legal, or investor domain persona's answer, without an
 actual professional's confirmation</li>
 <li>Reuse third-party copyrighted material that may be embedded in
-Codex's generated output commercially, as-is, without checking its
+Claude Code's generated output commercially, as-is, without checking its
 source</li>
 </ul>
 <p>If you have a specific situation in mind, please read the

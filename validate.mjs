@@ -47,12 +47,12 @@ const KEY_FILES = [
   pluginPath('skills/persona-triggers/SKILL.md'),
   pluginPath('skills/persona-investor/SKILL.md'),
   pluginPath('skills/persona-lawyer/SKILL.md'),
+  pluginPath('skills/persona-accountant/SKILL.md'),
+  pluginPath('skills/persona-marketer/SKILL.md'),
   pluginPath('reference/persona_full_core.md'),
   pluginPath('reference/test_scenarios.md'),
   'README.md',
   'README.en.md',
-  pluginPath('.codex-plugin/plugin.json'),
-  '.agents/plugins/marketplace.json',
 ];
 // 관점 수를 뜻하는 표현만 (년 제외). 캡처된 모든 숫자는 N과 같아야 한다.
 const COUNT_PATTERNS = [
@@ -139,16 +139,15 @@ for (const d of DOMAINS) {
 
 // ── 6) JSON 유효성 + 이름/소스 경로 ────────────────────────────────────
 try {
-  const plugin = JSON.parse(read(pluginPath('.codex-plugin/plugin.json')));
+  const plugin = JSON.parse(read(pluginPath('.claude-plugin/plugin.json')));
   if (plugin.name !== 'sodam-persona') err(`plugin.json name(${plugin.name}) ≠ sodam-persona`);
-  if (plugin.skills !== './skills/') err(`plugin.json skills(${plugin.skills}) ≠ ./skills/`);
 } catch (e) { err(`plugin.json 파싱 실패: ${e.message}`); }
 try {
-  const mkt = JSON.parse(read('.agents/plugins/marketplace.json'));
+  const mkt = JSON.parse(read('.claude-plugin/marketplace.json'));
   const p0 = mkt.plugins?.[0];
   if (p0?.name !== 'sodam-persona') err(`marketplace plugins[0].name(${p0?.name}) ≠ sodam-persona`);
-  if (p0?.source?.path && !existsSync(P(p0.source.path)))
-    err(`marketplace source 경로 없음: ${p0.source.path}`);
+  if (p0?.source && !existsSync(P(p0.source)))
+    err(`marketplace source 경로 없음: ${p0.source}`);
 } catch (e) { err(`marketplace.json 파싱 실패: ${e.message}`); }
 
 // ── 7) 면책(disclaimer) 강제 존재 — #14 회계세무·#11 법률 안전 필수 ────────
@@ -205,7 +204,7 @@ const isCheckableRepoRef = (ref) => {
   if (/^persona-[a-z0-9-]+\/SKILL\.md$/.test(ref)) return true;
   if (ref.startsWith('plugins/sodam-persona/')) return true;
   if (ref.startsWith('reference/')) return true;
-  if (ref.startsWith('.codex-plugin/') || ref.startsWith('.agents/plugins/')) return true;
+  if (ref.startsWith('.claude-plugin/')) return true;
   if (ref.startsWith('.github/')) return true;
   return false;
 };

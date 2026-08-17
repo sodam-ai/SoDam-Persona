@@ -1,7 +1,7 @@
 {
   "name": "sodam-persona",
-  "version": "1.1.1",
-  "description": "[Legacy Claude compatibility] 바이브코딩 AI 개발 파트너 페르소나 v5 — Codex 포팅의 이전 호스트용 매니페스트.",
+  "version": "1.2.0",
+  "description": "바이브코딩 AI 개발 파트너 페르소나 v5 — 항상켜짐 코어(hook) + 조건부 15관점/도메인(skills).",
   "author": {
     "name": "sodam-ai"
   },

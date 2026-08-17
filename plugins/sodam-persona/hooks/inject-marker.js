@@ -1,5 +1,5 @@
-// Codex UserPromptSubmit hook: 페르소나 마커(트리거 요약·자가점검·컴팩션 복구)를 매 프롬프트 주입.
-// __dirname 자기참조 → ${PLUGIN_ROOT} 치환 실패에도 내성(자기 폴더 기준).
+// UserPromptSubmit hook: 페르소나 마커(트리거 요약·자가점검·컴팩션 복구)를 매 프롬프트 주입.
+// __dirname 자기참조 → ${CLAUDE_PLUGIN_ROOT} 치환 실패에도 내성(자기 폴더 기준).
 const fs = require('fs');
 const path = require('path');
 let c = '';
@@ -13,7 +13,7 @@ const output = JSON.stringify({
   hookSpecificOutput: { hookEventName: 'UserPromptSubmit', additionalContext: c }
 });
 
-// Codex sends hook metadata through stdin. Drain it before exiting so very large
+// The host sends hook metadata through stdin. Drain it before exiting so very large
 // prompts cannot surface an EPIPE/EOF in the caller even though this hook does
 // not need to inspect the payload.
 if (process.stdin.isTTY) {

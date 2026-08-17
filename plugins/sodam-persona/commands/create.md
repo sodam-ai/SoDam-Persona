@@ -68,6 +68,6 @@ grep -rn "옛N명\|옛N관점\|옛N개 관점\|옛N개 도메인 관점\|A~옛�
 
 ## 5단계. 마무리 안내
 
-- 설치된 캐시에는 자동 반영되지 않는다는 점을 안내: `codex plugin marketplace upgrade sodam-persona` → `codex plugin remove sodam-persona` → `codex plugin add sodam-persona@sodam-persona` → 새 task 시작
+- 설치된 캐시에는 자동 반영되지 않는다는 점을 안내: `/plugin marketplace update sodam-persona` → `/plugin uninstall sodam-persona@sodam-persona` → `/plugin install sodam-persona@sodam-persona` → `/reload-plugins`
 - git 커밋은 바뀐 파일만 정확히 이름 지정해 add (`git add -A` 금지, 이 저장소 README.md §8의 기존 규칙), conventional commit 형식으로 작성
 - 실제 push·PR 생성·merge는 사용자의 명시적 승인 없이는 실행하지 않는다
