@@ -469,7 +469,7 @@ A Claude Code "plugin" is a bundle made of these 4 pieces.
 
 The `commands/` folder holds the procedure text that the `persona-create`/`persona-edit` skills read and follow.
 
-### The 11 checks performed by the automated consistency checker (`validate.mjs`)
+### The 12 checks performed by the automated consistency checker (`validate.mjs`)
 
 This mechanically prevents numbers from drifting out of sync (for example, when adding a new perspective or changing a trigger). It uses only Node.js built-ins, with no external dependencies.
 
@@ -487,12 +487,13 @@ This mechanically prevents numbers from drifting out of sync (for example, when 
 | 9 | Whether backtick-wrapped file references inside the documentation actually point to files that exist (broken-link prevention) |
 | 10 | Whether a developer's personal absolute computer path (one containing a real user account name) has accidentally leaked into the documentation or plugin files |
 | 11 | Whether `hooks.json` correctly uses the Claude Code variable `${CLAUDE_PLUGIN_ROOT}` (preventing another host's variable name from slipping in) and whether the hook scripts it references actually exist |
+| 12 | For domain skills (accounting/tax, marketing, etc.) that keep their own "trigger word group" list, whether that list stays exactly in sync with the matching list in `persona-triggers/SKILL.md` |
 
 See [Commands](#commands) and [Troubleshooting](#troubleshooting) for how to run this and read its output.
 
 ### Continuous integration (CI)
 
-`.github/workflows/validate.yml` automatically runs `node validate.mjs` on every push to `main` and on every pull request, blocking any change that fails the 11 checks above from reaching `main`.
+`.github/workflows/validate.yml` automatically runs `node validate.mjs` on every push to `main` and on every pull request, blocking any change that fails the 12 checks above from reaching `main`.
 
 ---
 
@@ -667,7 +668,7 @@ This project was later ported to be Codex-only, becoming today's `SoDam Persona 
 | Typing `node` in the terminal gives a "command not recognized" error | Node.js isn't installed, or the terminal wasn't reopened after installing it | Install from `nodejs.org`, then close every open terminal window and open a new one |
 | `node build-docs.mjs` says "pandoc is not installed" | Pandoc is missing | Only needed if you're editing the documentation yourself. If you're just *using* the plugin, this error is safe to ignore. To fix it, install from `pandoc.org/installing.html` |
 | `/plugin marketplace add sodam-ai/SoDam-Persona` fails with a network error | Git isn't installed, the repository name is mistyped, or a firewall/proxy is blocking it | Check Git with `git --version`, double-check the repository name's spelling, and check proxy settings if you're on a corporate/school network |
-| `node validate.mjs` prints `❌ FAIL` | Some number — perspective count, trigger count, skill count, etc. — has drifted out of sync, usually while adding or editing a persona | Read the printed error list line by line, open the referenced file, and fix the number, then rerun. See the "11 checks" table in [Architecture](#architecture) for what each numbered check means |
+| `node validate.mjs` prints `❌ FAIL` | Some number — perspective count, trigger count, skill count, etc. — has drifted out of sync, usually while adding or editing a persona | Read the printed error list line by line, open the referenced file, and fix the number, then rerun. See the "12 checks" table in [Architecture](#architecture) for what each numbered check means |
 | An accounting/tax or legal answer is missing its disclaimer | Very likely a real defect, not expected behavior | Please report it via the repository's GitHub Issues. `validate.mjs` check #7 exists specifically to prevent this regression, so also confirm you're on the latest version |
 | A path-related error appears when typing a command into Windows PowerShell | Quotation marks or backslashes changed while being retyped by hand | Copy this document's code blocks and paste them directly instead of typing them manually |
 | The persona feels like it's drifted after a long session | This is expected — the marker is re-injected on every message by design, to auto-recover the persona | No action needed. If it still feels off, start a new session |

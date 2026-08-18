@@ -286,6 +286,24 @@ try {
   }
 } catch (e) { err(`hooks.json 파싱 실패: ${e.message}`); }
 
+// ── 12) 도메인 스킬 "트리거 단어군" 문자열이 persona-triggers와 그대로 동기화되어 있는가 ──
+// 근거: commands/create.md 3-1단계 자신이 "실제 라이브 테스트에서 17건 누락 발견됨"이라고
+// 기록할 만큼, 같은 트리거 단어 목록이 여러 파일에 손으로 복사돼 있다가 한쪽만 고쳐 어긋나는
+// 사고가 이미 실제로 있었다. persona-accountant/persona-marketer SKILL.md는 persona-triggers의
+// 해당 도메인 "트리거 단어군:" 줄을 그대로 복사해 두는 것이 기존 관례(실측 확인)이므로, 그
+// 줄이 서로 다르면 어느 한쪽이 갱신 없이 어긋난 것 — 이 관례를 지키는 도메인만 검사한다.
+// (investor·lawyer는 skill 파일에 별도 단어 목록을 두지 않는 설계라 검사 대상에서 자연히 제외됨 —
+// 형식이 다른 파일끼리 억지로 비교해 오탐을 만들지 않기 위함)
+for (const d of DOMAINS) {
+  const skillPath = pluginPath('skills', d, 'SKILL.md');
+  if (!existsSync(P(skillPath))) continue;
+  const m = read(skillPath).match(/트리거 단어군:\s*([^\n]+)/);
+  if (!m) continue;
+  const line = m[1].trim();
+  if (!triggers.includes(line))
+    err(`도메인 트리거 단어 동기화 어긋남 (${d}/SKILL.md): persona-triggers/SKILL.md에 동일한 "트리거 단어군" 줄이 없음`);
+}
+
 // ── 결과 ────────────────────────────────────────────────────────────────
 console.log(`SoDam-Persona 정합성 검사 — 관점 ${N}명 · 패턴 ${uniqLetters.length}개 · 스킬 ${nSkills}개`);
 if (errors.length === 0) {
