@@ -5,5 +5,7 @@
   "author": {
     "name": "sodam-ai"
   },
+  "repository": "https://github.com/sodam-ai/SoDam-Persona",
+  "license": "Apache-2.0",
   "keywords": ["persona", "vibe-coding", "korean", "always-on", "personal-setup"]
 }
