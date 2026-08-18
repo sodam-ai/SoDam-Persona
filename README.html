@@ -1032,8 +1032,8 @@ id="새-도메인-페르소나를-추가하는-흐름-sodam-personapersona-creat
 <p><code>commands/</code> 폴더는
 <code>persona-create</code>/<code>persona-edit</code> skill이 읽어서
 수행하는 절차 원문을 담고 있습니다.</p>
-<h3 id="자동-정합성-검사-validatemjs가-지키는-10가지">자동 정합성 검사
-(<code>validate.mjs</code>)가 지키는 10가지</h3>
+<h3 id="자동-정합성-검사-validatemjs가-지키는-11가지">자동 정합성 검사
+(<code>validate.mjs</code>)가 지키는 11가지</h3>
 <p>새 관점을 추가하거나 트리거를 바꿀 때 숫자가 어긋나는
 것("드리프트")을 기계적으로 막기 위한 검사기입니다. 외부 라이브러리 없이
 Node.js 내장 기능만 사용합니다.</p>
@@ -1097,6 +1097,13 @@ Node.js 내장 기능만 사용합니다.</p>
 <td>문서와 플러그인 파일에 개발자 개인 컴퓨터의 실제 사용자 계정이 담긴
 절대경로가 실수로 노출되지 않았는가</td>
 </tr>
+<tr>
+<td>11</td>
+<td><code>hooks.json</code>이 Claude Code 변수
+<code>${CLAUDE_PLUGIN_ROOT}</code>를 올바르게 쓰고 있고(다른 호스트용
+변수명 혼입 방지), 그 안에서 참조하는 hook 스크립트 파일이 실제로
+존재하는가</td>
+</tr>
 </tbody>
 </table>
 <p>실행 방법과 결과 읽는 법은 <a href="#명령어">명령어</a>와 <a
@@ -1105,7 +1112,7 @@ href="#문제와-오류-대처-방법">문제와 오류 대처 방법</a>을
 <h3 id="지속적-통합ci">지속적 통합(CI)</h3>
 <p><code>.github/workflows/validate.yml</code>이 <code>main</code>
 브랜치로의 push와 모든 Pull Request마다 <code>node validate.mjs</code>를
-자동으로 실행해, 위 10가지 검사를 통과하지 못한 변경이
+자동으로 실행해, 위 11가지 검사를 통과하지 못한 변경이
 <code>main</code>에 들어오지 못하도록 막습니다.</p>
 <hr />
 <h2 id="보안과-데이터-흐름">보안과 데이터 흐름</h2>
@@ -1466,7 +1473,7 @@ Actions(CI) 자동 실행 연동.</li>
 <td>관점 수·트리거 수·스킬 수 등 어딘가 숫자가 어긋남(주로 새 페르소나
 추가/편집 도중)</td>
 <td>출력된 오류 목록을 한 줄씩 읽고, 표시된 파일을 직접 열어 숫자를 맞춘
-뒤 다시 실행. <a href="#아키텍처">아키텍처</a>의 "10가지 검사표"에서 각
+뒤 다시 실행. <a href="#아키텍처">아키텍처</a>의 "11가지 검사표"에서 각
 번호의 의미를 확인</td>
 </tr>
 <tr>

@@ -1098,8 +1098,8 @@ specific situations.</li>
 <code>persona-create</code>/<code>persona-edit</code> skills read and
 follow.</p>
 <h3
-id="the-10-checks-performed-by-the-automated-consistency-checker-validatemjs">The
-10 checks performed by the automated consistency checker
+id="the-11-checks-performed-by-the-automated-consistency-checker-validatemjs">The
+11 checks performed by the automated consistency checker
 (<code>validate.mjs</code>)</h3>
 <p>This mechanically prevents numbers from drifting out of sync (for
 example, when adding a new perspective or changing a trigger). It uses
@@ -1169,6 +1169,13 @@ actually point to files that exist (broken-link prevention)</td>
 containing a real user account name) has accidentally leaked into the
 documentation or plugin files</td>
 </tr>
+<tr>
+<td>11</td>
+<td>Whether <code>hooks.json</code> correctly uses the Claude Code
+variable <code>${CLAUDE_PLUGIN_ROOT}</code> (preventing another host's
+variable name from slipping in) and whether the hook scripts it
+references actually exist</td>
+</tr>
 </tbody>
 </table>
 <p>See <a href="#commands">Commands</a> and <a
@@ -1177,7 +1184,7 @@ its output.</p>
 <h3 id="continuous-integration-ci">Continuous integration (CI)</h3>
 <p><code>.github/workflows/validate.yml</code> automatically runs
 <code>node validate.mjs</code> on every push to <code>main</code> and on
-every pull request, blocking any change that fails the 10 checks above
+every pull request, blocking any change that fails the 11 checks above
 from reaching <code>main</code>.</p>
 <hr />
 <h2 id="security--data-flow">Security &amp; Data Flow</h2>
@@ -1564,7 +1571,7 @@ corporate/school network</td>
 <td>Some number — perspective count, trigger count, skill count, etc. —
 has drifted out of sync, usually while adding or editing a persona</td>
 <td>Read the printed error list line by line, open the referenced file,
-and fix the number, then rerun. See the "10 checks" table in <a
+and fix the number, then rerun. See the "11 checks" table in <a
 href="#architecture">Architecture</a> for what each numbered check
 means</td>
 </tr>

@@ -264,6 +264,28 @@ const validatorComments = readFileSync(P('validate.mjs'), 'utf8')
   .join('\n');
 checkPersonalPaths(validatorComments, 'validate.mjs (comments)');
 
+// ── 11) hooks.json 변수명 오류 · 참조 스크립트 존재 검사 (2026-08-18 추가) ──
+// 근거: hooks.json이 Codex 이식 중 Claude Code 변수 ${CLAUDE_PLUGIN_ROOT}를
+// Codex 관례 ${PLUGIN_ROOT}로 잘못 갖고 있던 채 커밋된 적이 있음(2026-08-17 발견·수정).
+// 이 상태면 JSON 문법은 유효해 기존 검사(#6)로는 못 잡지만, hook이 Claude Code에서
+// 전혀 실행되지 않는 치명적 결함이 된다 — 그 빈틈만 메운다.
+try {
+  const hooksConfig = JSON.parse(read(pluginPath('hooks/hooks.json')));
+  const strings = [];
+  (function walk(node) {
+    if (typeof node === 'string') { strings.push(node); return; }
+    if (Array.isArray(node)) { node.forEach(walk); return; }
+    if (node && typeof node === 'object') { Object.values(node).forEach(walk); }
+  })(hooksConfig);
+  for (const s of strings) {
+    if (/\bPLUGIN_ROOT\b/.test(s))
+      err(`hooks.json 잘못된 변수명 (Claude Code는 \${CLAUDE_PLUGIN_ROOT} 사용): "${s}"`);
+    for (const m of s.matchAll(/\$\{CLAUDE_PLUGIN_ROOT\}\/([^"']+)/g)) {
+      if (!existsSync(P(PLUGIN_ROOT, m[1]))) err(`hooks.json 참조 스크립트 없음: ${m[1]}`);
+    }
+  }
+} catch (e) { err(`hooks.json 파싱 실패: ${e.message}`); }
+
 // ── 결과 ────────────────────────────────────────────────────────────────
 console.log(`SoDam-Persona 정합성 검사 — 관점 ${N}명 · 패턴 ${uniqLetters.length}개 · 스킬 ${nSkills}개`);
 if (errors.length === 0) {
