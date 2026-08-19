@@ -5,8 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/inject-core.js\"",
-            "additionalContextLimit": 0
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/inject-core.js\""
           }
         ]
       }
@@ -16,8 +15,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/inject-marker.js\"",
-            "additionalContextLimit": 0
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/inject-marker.js\""
           }
         ]
       }

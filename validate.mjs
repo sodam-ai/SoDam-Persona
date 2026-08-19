@@ -304,6 +304,32 @@ for (const d of DOMAINS) {
     err(`도메인 트리거 단어 동기화 어긋남 (${d}/SKILL.md): persona-triggers/SKILL.md에 동일한 "트리거 단어군" 줄이 없음`);
 }
 
+// ── 13) hook 출력 문자수 하드캡 근접 검사 (2026-08-19 추가) ────────────────
+// 근거: Claude Code 공식 문서(code.claude.com/docs/en/hooks) 확인 결과, hook 출력 문자열
+// (additionalContext 포함)은 10,000자로 하드캡되어 있고, 초과분은 파일로 저장되고 미리보기로
+// 대체된다 — 즉 SessionStart/UserPromptSubmit이 실제로 주입하는 내용이 조용히 잘려나간다.
+// persona_core.md(SessionStart)와 persona_marker.txt(UserPromptSubmit)는 hook이 파일 내용을
+// 그대로 additionalContext에 담아 보내므로, 파일 길이 자체가 곧 주입되는 문자수다.
+// persona-create로 16번째 이후 페르소나가 추가되면 persona_core.md가 계속 자라나므로,
+// 하드캡에 걸리기 전에 기계적으로 잡아야 한다(사람이 매번 글자수를 세지 않음).
+const HOOK_OUTPUT_HARD_CAP = 10000;
+const HOOK_OUTPUT_WARN_AT = 9000; // 여유 있게 미리 경고(90% 지점)
+const HOOK_OUTPUT_FILES = [
+  ['persona_core.md (SessionStart)', core],
+  ['persona_marker.txt (UserPromptSubmit)', marker],
+];
+const hookSizeWarnings = [];
+for (const [label, text] of HOOK_OUTPUT_FILES) {
+  if (text.length >= HOOK_OUTPUT_HARD_CAP)
+    err(`hook 출력 하드캡 초과 (${label}): ${text.length}자 ≥ ${HOOK_OUTPUT_HARD_CAP}자 — Claude Code가 내용을 잘라내고 미리보기로 대체함`);
+  else if (text.length >= HOOK_OUTPUT_WARN_AT)
+    hookSizeWarnings.push(`${label}: ${text.length}자 — 하드캡(${HOOK_OUTPUT_HARD_CAP}자)의 90% 이상, 여유 ${HOOK_OUTPUT_HARD_CAP - text.length}자뿐`);
+}
+if (hookSizeWarnings.length) {
+  console.log(`⚠️  hook 출력 하드캡 근접 경고 ${hookSizeWarnings.length}건 (실패 아님, 여유 있을 때 내용 정리 권장):`);
+  for (const w of hookSizeWarnings) console.log(`  · ${w}`);
+}
+
 // ── 결과 ────────────────────────────────────────────────────────────────
 console.log(`SoDam-Persona 정합성 검사 — 관점 ${N}명 · 패턴 ${uniqLetters.length}개 · 스킬 ${nSkills}개`);
 if (errors.length === 0) {
