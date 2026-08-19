@@ -7,6 +7,7 @@ try {
   c = fs.readFileSync(path.join(__dirname, 'persona_marker.txt'), 'utf8');
 } catch (e) {
   process.stderr.write('[sodam-persona] persona_marker.txt could not be loaded.\n');
+  c = '[sodam-persona] persona_marker.txt를 찾을 수 없어 페르소나 마커가 로드되지 않았습니다 — 플러그인 설치 상태를 확인하세요.';
 }
 const output = JSON.stringify({
   continue: true,
