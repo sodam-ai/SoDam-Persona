@@ -576,6 +576,38 @@ Check #10 in `validate.mjs` automatically catches a developer's personal compute
 Listed with the most recent entries at the top. Click (or tap) an item to expand its details.
 
 <details>
+<summary><strong>2026-08-20 ~ 2026-08-21 — Full re-audit: fixed silent failures, synced the hook-failure recovery file</strong></summary>
+
+A round that re-read the entire repository file by file and fixed real defects it found.
+
+- **Found and fixed 2 silent failures**: when `persona_core.md`/`persona_marker.txt` was either (a) missing entirely or (b) present but empty, the hooks were quietly injecting empty content with no warning at all. Fixed both cases — a visible Korean warning message now appears either way.
+- **Found and restored a neglected manual-recovery file (`reference/persona_full_core.md`)**: this file — the one meant to be manually loaded if the hooks ever fail — had gone unedited for 3 days, so its domain-expert sections (investor, lawyer, accounting/tax, marketing) and mandatory-disclaimer rule were entirely missing. Restored to match the source of truth. Its trigger-word list (which was still the pre-trim, outdated version) and its anti-pattern-avoidance section (which never existed there) were also synced to the current version.
+- **Strengthened `persona-lawyer`'s disclaimer**: `persona-accountant` had a dedicated "mandatory disclaimer" callout box that `persona-lawyer` lacked — added the same box in the same format.
+- **Fixed a broken reset procedure in `test_scenarios.md`**: it was pointing at 5 file names that had been renamed long ago; replaced with the current real paths.
+- **Trimmed 57 trigger words**: removed overly common everyday words (e.g. "run", "next", "all") from the tools/tasks trigger category to reduce false-positive over-triggering, freeing up headroom in the hook output (9,952 → 9,399 characters, up from 48 to 601 characters of margin).
+- **Finalized the decision on further trigger trimming as "on hold"**: after verifying 8 real-usage scenarios, no actual failures traceable to trigger over-breadth were found, so further trimming is deferred until concrete evidence accumulates.
+
+</details>
+
+<details>
+<summary><strong>2026-08-19 — Constrained the work scope of "improve this briefly"-style requests; discovered the hook-output hard cap</strong></summary>
+
+- **Fix based on a real regression**: a request like "improve this briefly" was only shortening the *answer length*, not constraining the actual *work scope* (how many files get explored/edited) — in real use this once led to a 13-minute detour touching many files. Added a rule that also caps the work scope to the minimal unit.
+- **Discovered the hook-output 10,000-character hard cap**: confirmed via Claude Code's official documentation that hook output text gets silently truncated past 10,000 characters. Measured `persona_core.md` at the time and found it was already at 9,952 characters (only 48 left). Added a 13th check to `validate.mjs` that automatically warns as this limit is approached.
+- Removed the dead `additionalContextLimit` field from `hooks.json` (confirmed it isn't part of Claude Code's official schema).
+- Added a 12th check to `validate.mjs` that automatically detects when a domain skill's (accounting/tax, marketing, etc.) own trigger-word list drifts out of sync with the source of truth.
+- Added the missing `license` and `repository` metadata fields to `plugins/sodam-persona/.claude-plugin/plugin.json`.
+
+</details>
+
+<details>
+<summary><strong>2026-08-18 — Added a regression check for the hooks.json variable-name bug</strong></summary>
+
+- Added an 11th check to `validate.mjs` that automatically catches it if `hooks.json` ever uses the wrong variable name instead of Claude Code's `${CLAUDE_PLUGIN_ROOT}`, or references a hook script file that doesn't actually exist.
+
+</details>
+
+<details>
 <summary><strong>2026-08-17 — Reverted to Claude Code only</strong></summary>
 
 - Decided to maintain Codex support independently in a separate repository — this repository is confirmed as a Claude Code-only plugin again.

@@ -1373,6 +1373,86 @@ downloads this plugin, so this document does not cover it.</p>
 <p>Listed with the most recent entries at the top. Click (or tap) an
 item to expand its details.</p>
 <details>
+<summary><strong>2026-08-20 ~ 2026-08-21 — Full re-audit: fixed silent failures, synced the hook-failure recovery file</strong></summary>
+
+<p>A round that re-read the entire repository file by file and fixed
+real defects it found.</p>
+<ul>
+<li><strong>Found and fixed 2 silent failures</strong>: when
+<code>persona_core.md</code>/<code>persona_marker.txt</code> was either
+(a) missing entirely or (b) present but empty, the hooks were quietly
+injecting empty content with no warning at all. Fixed both cases — a
+visible Korean warning message now appears either way.</li>
+<li><strong>Found and restored a neglected manual-recovery file
+(<code>reference/persona_full_core.md</code>)</strong>: this file — the
+one meant to be manually loaded if the hooks ever fail — had gone
+unedited for 3 days, so its domain-expert sections (investor, lawyer,
+accounting/tax, marketing) and mandatory-disclaimer rule were entirely
+missing. Restored to match the source of truth. Its trigger-word list
+(which was still the pre-trim, outdated version) and its
+anti-pattern-avoidance section (which never existed there) were also
+synced to the current version.</li>
+<li><strong>Strengthened <code>persona-lawyer</code>'s
+disclaimer</strong>: <code>persona-accountant</code> had a dedicated
+"mandatory disclaimer" callout box that <code>persona-lawyer</code>
+lacked — added the same box in the same format.</li>
+<li><strong>Fixed a broken reset procedure in
+<code>test_scenarios.md</code></strong>: it was pointing at 5 file names
+that had been renamed long ago; replaced with the current real
+paths.</li>
+<li><strong>Trimmed 57 trigger words</strong>: removed overly common
+everyday words (e.g. "run", "next", "all") from the tools/tasks trigger
+category to reduce false-positive over-triggering, freeing up headroom
+in the hook output (9,952 → 9,399 characters, up from 48 to 601
+characters of margin).</li>
+<li><strong>Finalized the decision on further trigger trimming as "on
+hold"</strong>: after verifying 8 real-usage scenarios, no actual
+failures traceable to trigger over-breadth were found, so further
+trimming is deferred until concrete evidence accumulates.</li>
+</ul>
+</details>
+
+<details>
+<summary><strong>2026-08-19 — Constrained the work scope of "improve this briefly"-style requests; discovered the hook-output hard cap</strong></summary>
+
+<ul>
+<li><strong>Fix based on a real regression</strong>: a request like
+"improve this briefly" was only shortening the <em>answer length</em>,
+not constraining the actual <em>work scope</em> (how many files get
+explored/edited) — in real use this once led to a 13-minute detour
+touching many files. Added a rule that also caps the work scope to the
+minimal unit.</li>
+<li><strong>Discovered the hook-output 10,000-character hard
+cap</strong>: confirmed via Claude Code's official documentation that
+hook output text gets silently truncated past 10,000 characters.
+Measured <code>persona_core.md</code> at the time and found it was
+already at 9,952 characters (only 48 left). Added a 13th check to
+<code>validate.mjs</code> that automatically warns as this limit is
+approached.</li>
+<li>Removed the dead <code>additionalContextLimit</code> field from
+<code>hooks.json</code> (confirmed it isn't part of Claude Code's
+official schema).</li>
+<li>Added a 12th check to <code>validate.mjs</code> that automatically
+detects when a domain skill's (accounting/tax, marketing, etc.) own
+trigger-word list drifts out of sync with the source of truth.</li>
+<li>Added the missing <code>license</code> and <code>repository</code>
+metadata fields to
+<code>plugins/sodam-persona/.claude-plugin/plugin.json</code>.</li>
+</ul>
+</details>
+
+<details>
+<summary><strong>2026-08-18 — Added a regression check for the hooks.json variable-name bug</strong></summary>
+
+<ul>
+<li>Added an 11th check to <code>validate.mjs</code> that automatically
+catches it if <code>hooks.json</code> ever uses the wrong variable name
+instead of Claude Code's <code>${CLAUDE_PLUGIN_ROOT}</code>, or
+references a hook script file that doesn't actually exist.</li>
+</ul>
+</details>
+
+<details>
 <summary><strong>2026-08-17 — Reverted to Claude Code only</strong></summary>
 
 <ul>

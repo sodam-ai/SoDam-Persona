@@ -1291,6 +1291,77 @@ Anthropic의 공식 개인정보처리방침을 따릅니다.</p>
 <p>날짜가 최신인 항목이 위에 오도록 정리했습니다. 항목을 클릭(또는
 탭)하면 세부 내용이 펼쳐집니다.</p>
 <details>
+<summary><strong>2026-08-20 ~ 2026-08-21 — 전수 재감사: silent failure 수정, hook 실패 복구 파일 동기화</strong></summary>
+
+<p>전 저장소를 파일 단위로 다시 훑어 실제 결함을 찾아 고친
+라운드입니다.</p>
+<ul>
+<li><strong>silent failure 2건 발견·수정</strong>:
+<code>persona_core.md</code>/<code>persona_marker.txt</code> 파일이 (a)
+아예 없거나 (b) 존재하지만 비어있을 때, hook이 아무 경고 없이 조용히 빈
+내용을 주입하던 문제를 발견해 수정 — 이제 두 경우 모두 눈에 보이는
+한국어 경고 문구가 뜹니다.</li>
+<li><strong>hook 실패 시 수동 복구용
+파일(<code>reference/persona_full_core.md</code>)이 방치돼 있던 것
+발견·복원</strong>: 이 파일이 3일간 갱신되지 않아 도메인
+전문가(투자자·변호사·회계세무·마케팅) 섹션과 면책 강제 규정이 통째로
+빠져 있었음 — 정본과 동일하게 복원. 이어서 트리거 단어 목록(트리밍 이전
+구버전이던 것)과 안티패턴 회피 섹션(아예 없었던 것)도 최신본과
+동기화.</li>
+<li><strong><code>persona-lawyer</code> 면책 방어선 보강</strong>:
+<code>persona-accountant</code>엔 있던 "필수 면책" 전용 안내 박스가
+<code>persona-lawyer</code>엔 없어 같은 형식으로 추가.</li>
+<li><strong><code>test_scenarios.md</code>의 결함 재세팅 절차 오류
+수정</strong>: 이미 개명된 지 오래된 옛 파일명 5개를 가리키고 있던 것을
+현재 실제 경로로 교체.</li>
+<li><strong>트리거 단어 57개 정리</strong>: 도구/작업 관련 트리거 중
+지나치게 일상적인 단어(예: "실행", "다음", "모두")를 제거해 오작동(과잉
+반응) 위험을 낮추고, hook 출력 여유 공간을 확보(9,952자→9,399자, 여유
+601자).</li>
+<li><strong>트리거 다이어트를 더 진행할지 여부는 "보류"로 최종
+확정</strong>: 8개 실사용 시나리오를 검증한 결과 트리거 과다로 인한 실제
+오류 사례가 없어, 근거가 쌓이기 전까지 추가 축소는 하지 않기로
+결정.</li>
+</ul>
+</details>
+
+<details>
+<summary><strong>2026-08-19 — "간단히 개선해줘"류 요청의 작업범위 제약, hook 출력 하드캡 발견·대응</strong></summary>
+
+<ul>
+<li><strong>실제 회귀 사례 기반 수정</strong>: "간단히 개선해줘" 같은
+요청이 답변 분량만 줄일 뿐 실제 작업 범위(파일 탐색·수정 개수)는 전혀
+제약하지 않아, 실사용 중 13분간 여러 파일을 건드리는 사고가 발생 —
+분량뿐 아니라 작업 범위도 최소 단위로 제한하는 규칙을 추가.</li>
+<li><strong>hook 출력 10,000자 하드캡 발견</strong>: Claude Code 공식
+문서를 확인해 hook이 내보내는 텍스트가 10,000자를 넘으면 초과분이 조용히
+잘려나간다는 사실을 확인 — <code>persona_core.md</code>가 당시
+9,952자(여유 48자뿐)였던 것을 실측으로 발견. <code>validate.mjs</code>에
+13번째 검사(하드캡 근접 경고)를 추가해 재발을 자동으로 감시하도록
+함.</li>
+<li>죽은 설정이던 <code>additionalContextLimit</code> 필드를
+<code>hooks.json</code>에서 제거(Claude Code 공식 스키마에 없는 값으로
+확인됨).</li>
+<li><code>validate.mjs</code>에 12번째 검사 추가 — 도메인
+skill(회계세무·마케팅 등)의 자체 트리거 단어 목록이 정본과 어긋나는 것을
+자동 감지.</li>
+<li><code>plugins/sodam-persona/.claude-plugin/plugin.json</code>에
+<code>license</code>·<code>repository</code> 메타데이터 필드 보완.</li>
+</ul>
+</details>
+
+<details>
+<summary><strong>2026-08-18 — hooks.json 변수 오류 재발 방지 검사 추가</strong></summary>
+
+<ul>
+<li><code>validate.mjs</code>에 11번째 검사 추가 —
+<code>hooks.json</code>이 Claude Code
+변수(<code>${CLAUDE_PLUGIN_ROOT}</code>) 대신 다른 변수명을 잘못 쓰거나,
+참조하는 hook 스크립트 파일이 실제로 없으면 자동으로 잡아냄.</li>
+</ul>
+</details>
+
+<details>
 <summary><strong>2026-08-17 — Claude Code 전용으로 원상복귀</strong></summary>
 
 <ul>
