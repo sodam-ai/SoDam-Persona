@@ -177,8 +177,8 @@ originSessionId: 858f2a96-669c-457a-93d3-7c38fd3732cf
 ## 재세팅 절차 (결함 보고 후 사용자 요청 시)
 
 1. 결함 발화·기대·실제 입력 → 어느 파일의 어느 패턴 누락인지 진단
-2. 5개 파일 동기 갱신: `MEMORY.md`, `user_persona.md`, `user_persona_min.md`, `user_persona_marker.txt`, `user_persona_triggers.md`
-3. 충돌 우선순위 영향 시 `user_persona.md` Section 4 함께 갱신
+2. 4개 파일 동기 갱신: `plugins/sodam-persona/hooks/persona_core.md`, `plugins/sodam-persona/hooks/persona_marker.txt`, `plugins/sodam-persona/skills/persona-triggers/SKILL.md`, `plugins/sodam-persona/reference/persona_full_core.md` [2026-08-20: 이 절차가 가리키던 `MEMORY.md`·`user_persona.md`·`user_persona_min.md`·`user_persona_marker.txt`·`user_persona_triggers.md`는 옛 파일명 — 개명 후 갱신 안 된 채 방치돼 있었음. `MEMORY.md`는 이 저장소 소관 파일이 아니라 목록에서 제외]
+3. 충돌 우선순위 영향 시 `plugins/sodam-persona/reference/persona_full_core.md` Section 4(매칭 원칙) 함께 갱신
 4. 본 시나리오 파일에도 회귀 케이스 추가
 5. 다음 세션에서 재검증
 
